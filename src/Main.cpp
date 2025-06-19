@@ -47,7 +47,8 @@ int main(void)
 	Mesh* testmesh2 = Tangerine::Create_Mesh(rectanglevertices, sizeof(rectanglevertices));
 	Tangerine::Set_CurrShader(testshader);
 	
-	float pos = 0.f;
+	float pos = 1.f;
+	float zoom = 0.f;
 	float rotation = 0.f;
 	while (!Tangerine::ShouldClose())
 	{
@@ -61,7 +62,7 @@ int main(void)
 		testmatrix = glm::translate(testmatrix,glm::vec3(pos, 0.0f, 0.0f));
 		Tangerine::Set_TransformMatrix(testmatrix);
 		Tangerine::Draw(testmesh);
-		pos += 0.02f;
+		//pos += 0.02f;
 
 		glm::mat4 testmatrix2 = glm::mat4(1.f);
 		testmatrix2 = glm::scale(testmatrix2, glm::vec3(100.f, 100.0f, 1.0f));
@@ -72,7 +73,8 @@ int main(void)
 		++rotation;
 
 		glm::vec2 vec = glm::vec2(pos, 0.f);
-		Tangerine::Set_CameraZoom(pos);
+		Tangerine::Set_CameraZoom(fabs(sinf(zoom)) + 0.1f);
+		zoom += 0.01f;
 		//Tangerine::Set_CameraPos(vec);
 
 		Tangerine::End_Draw();

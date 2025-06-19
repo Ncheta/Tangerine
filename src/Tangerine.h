@@ -63,7 +63,7 @@ typedef struct Vertex
 
 
 
-namespace Tangerine
+namespace Tangerine //@@TODO: add some kind of pixel to position thing for all position setters.
 {
 	void Engine_Init();
 	void Engine_Update();
