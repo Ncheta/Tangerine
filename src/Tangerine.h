@@ -14,6 +14,7 @@
 #include "glm/glm.hpp"
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <string>
 //------------------------------------------------------------------------------
 
 
@@ -72,11 +73,12 @@ namespace Tangerine
 	void End_Draw();
 	void Set_TransformMatrix(glm::mat4& transformMatrix);
 	void Rotate_Camera(float angle);
+	Shader* Create_Shader(const char* vertPath, const char* fragPath);
+	void Release_Shader(Shader** shader);
 	void Draw(const Mesh* mesh);
-	Shader Create_Shader(const char* vertPath, const char* fragPath);// @@TODO: add internal mesh and  shader managers
 	Mesh* Create_Mesh(Vertex vertices[], size_t arraySize);
 	void Release_Mesh(Mesh** mesh);
-	void Set_CurrShader(Shader& shader);
+	void Set_CurrShader(Shader* shader);
 	bool ShouldClose();
 }
 

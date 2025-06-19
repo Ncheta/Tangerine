@@ -22,7 +22,6 @@
 #include "stb_image.h"
 
 
-#include "shader.h"
 #include "Tangerine.h"
 
 
@@ -40,10 +39,10 @@ int main(void)
 									Vertex(glm::vec2(-0.5f,0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0f,0.0f,0.0f,1.0f)),
 
 									Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(0.0f,0.0f,1.0f,1.0f)),
-									Vertex(glm::vec2(-0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(0.0f,0.0f,1.0f,1.0f)),
+									Vertex(glm::vec2(-0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0f,0.0f,1.0f,1.0f)),
 									 Vertex(glm::vec2(-0.5f,0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0f,0.0f,0.0f,1.0f)) };
 
-	Shader testshader = Tangerine::Create_Shader("shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
+	Shader* testshader = Tangerine::Create_Shader("shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
 	Mesh* testmesh = Tangerine::Create_Mesh(vertices, sizeof(vertices));
 	Mesh* testmesh2 = Tangerine::Create_Mesh(rectanglevertices, sizeof(rectanglevertices));
 	Tangerine::Set_CurrShader(testshader);

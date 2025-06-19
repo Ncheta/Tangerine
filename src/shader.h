@@ -53,6 +53,7 @@ class Shader
 public:
 	//ctor for reading and building shader
 	Shader(const char* vertexPath, const char* fragPath);
+	~Shader();
 	void Use() const; //use/activate shader
 
 	//utils for Uniforms

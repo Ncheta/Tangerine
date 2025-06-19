@@ -77,6 +77,7 @@ void GraphicsSystem::Update()
 int GraphicsSystem::Exit()
 {
 	mMeshManager.ReleaseAll();
+	mShaderManager.ReleaseAll();
 	return 0;
 }
 
@@ -123,9 +124,9 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 	mesh->Draw();
 }
 
-void GraphicsSystem::SetCurrShader(Shader& shader)
+void GraphicsSystem::SetCurrShader(Shader* shader)
 {
-	mcurrShader = &shader;
+	mcurrShader = shader;
 }
 
 Shader* GraphicsSystem::CurrShader()

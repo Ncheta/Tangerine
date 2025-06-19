@@ -88,9 +88,14 @@ namespace Tangerine
 		Graphics.Camera.Rotate(angle);
 	}
 
-	Shader Create_Shader(const char* vertPath, const char* fragPath)
+	Shader* Create_Shader(const char* vertPath, const char* fragPath)
 	{
-		return Shader(vertPath, fragPath);
+		return Graphics.mShaderManager.CreateShader(vertPath, fragPath);
+	}
+
+	void Release_Shader(Shader** shader)
+	{
+		Graphics.mShaderManager.ReleaseShader(shader);
 	}
 
 	Mesh* Create_Mesh(Vertex vertices[], size_t arraySize)
@@ -103,7 +108,7 @@ namespace Tangerine
 		Graphics.mMeshManager.ReleaseMesh(mesh);
 	}
 
-	void Set_CurrShader(Shader& shader)
+	void Set_CurrShader(Shader* shader)
 	{
 		Graphics.SetCurrShader(shader);
 	}
