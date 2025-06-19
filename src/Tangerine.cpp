@@ -71,6 +71,16 @@ namespace Tangerine
 		Graphics.SetTransformMatrix(transformMatrix);
 	}
 
+	void Set_CameraPos(glm::vec2& pos)
+	{
+		Graphics.Camera.SetCameraPos(pos);
+	}
+
+	void Set_CameraZoom(float zoom)
+	{
+		Graphics.Camera.SetZoom(zoom);
+	}
+
 	void Draw(const Mesh* mesh)
 	{
 		if (!mesh)

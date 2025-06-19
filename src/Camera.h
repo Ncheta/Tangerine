@@ -58,6 +58,9 @@ public:
 	void Rotate(float angle);
 	
 	void SetWindowSize(int width, int height);
+	void SetCameraPos(glm::vec2& pos);
+
+	void SetZoom(float zoomval);
 	
 	//Public Variables:
 private:
@@ -65,9 +68,9 @@ private:
 
 	//Private Variables:
 	glm::vec2 mWindowSize{ 0.f };
-	float mRotation;
+	float mRotation{0.f};
 	glm::vec3 mCameraPosition{ 0.0f,0.0f,1.0f };
-	float zoom;
+	float mzoom{ 1.f };
 
 
 };

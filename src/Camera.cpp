@@ -53,7 +53,7 @@ glm::mat4 CameraObj::GetViewMatrix()
 	return view;
 }
 
-glm::mat4 CameraObj::GetProjectionMatrix()
+glm::mat4 CameraObj::GetProjectionMatrix() //@@TODO: increase near and far z's to add z layers (?)
 {
 
 	glm::mat4 projection = glm::ortho(
@@ -69,8 +69,9 @@ glm::mat4 CameraObj::GetViewProjMatrix()
 	
 	glm::mat4 viewprojMatrix(1.0f);
 	glm::mat4 rotationMatrix = glm::rotate(glm::radians(mRotation), glm::vec3(0.0, 0.0, 1.0));
+	glm::mat4 scaleMatrix = glm::scale(glm::vec3(mzoom, mzoom, 1.0f));
 
-	viewprojMatrix = GetProjectionMatrix() * rotationMatrix * GetViewMatrix();
+	viewprojMatrix = GetProjectionMatrix() * rotationMatrix * scaleMatrix * GetViewMatrix();
 	return viewprojMatrix;
 }
 
@@ -83,6 +84,17 @@ void CameraObj::Rotate(float angle)
 void CameraObj::SetWindowSize(int width, int height)
 {
 	mWindowSize = glm::vec2(width, height);
+}
+
+void CameraObj::SetCameraPos(glm::vec2& pos)
+{
+	mCameraPosition.x = pos.x;
+	mCameraPosition.y = pos.y;
+}
+
+void CameraObj::SetZoom(float zoom)
+{
+	mzoom = zoom;
 }
 
 

@@ -72,6 +72,8 @@ namespace Tangerine
 
 	void End_Draw();
 	void Set_TransformMatrix(glm::mat4& transformMatrix);
+	void Set_CameraPos(glm::vec2& pos);
+	void Set_CameraZoom(float zoom);
 	void Rotate_Camera(float angle);
 	Shader* Create_Shader(const char* vertPath, const char* fragPath);
 	void Release_Shader(Shader** shader);
