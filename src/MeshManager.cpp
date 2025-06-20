@@ -35,8 +35,13 @@
 Mesh* MeshManager::CreateMesh(Vertex vertices[], size_t arraySize)
 {
 	Mesh* newMesh = new Mesh(vertices, arraySize);
-	meshList.push_back(newMesh);
-	return newMesh;
+	if (newMesh)
+	{
+		meshList.push_back(newMesh);
+		return newMesh;
+	}
+	return nullptr;
+
 }
 
 void MeshManager::ReleaseMesh(Mesh** mesh)

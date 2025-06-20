@@ -58,7 +58,7 @@ public:
 	void Rotate(float angle);
 	
 	void SetWindowSize(int width, int height);
-	void SetCameraPos(glm::vec2& pos);
+	void SetCameraPos(const glm::vec2& pos);
 
 	void SetZoom(float zoomval);
 	
@@ -71,6 +71,9 @@ private:
 	float mRotation{0.f};
 	glm::vec3 mCameraPosition{ 0.0f,0.0f,1.0f };
 	float mzoom{ 1.f };
+
+	bool isMatrixDirty{ true };
+	glm::mat4 mviewProjMatrix{1.0f};
 
 
 };

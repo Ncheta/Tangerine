@@ -63,7 +63,7 @@ typedef struct Vertex
 
 
 
-namespace Tangerine
+namespace Tangerine //@@TODO: add some kind of pixel to position thing for all position setters.
 {
 	void Engine_Init();
 	void Engine_Update();
@@ -71,8 +71,9 @@ namespace Tangerine
 	void Start_Draw();
 
 	void End_Draw();
-	void Set_TransformMatrix(glm::mat4& transformMatrix);
-	void Set_CameraPos(glm::vec2& pos);
+	void Set_TransformMatrix(const glm::mat4& transformMatrix);
+	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle);
+	void Set_CameraPos(const glm::vec2& pos);
 	void Set_CameraZoom(float zoom);
 	void Rotate_Camera(float angle);
 	Shader* Create_Shader(const char* vertPath, const char* fragPath);

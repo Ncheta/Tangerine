@@ -66,12 +66,17 @@ namespace Tangerine
 		Graphics.EndDraw();
 	}
 
-	void Set_TransformMatrix(glm::mat4& transformMatrix)
+	void Set_TransformMatrix(const glm::mat4& transformMatrix)
 	{
 		Graphics.SetTransformMatrix(transformMatrix);
 	}
 
-	void Set_CameraPos(glm::vec2& pos)
+	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle)
+	{
+		Graphics.SetTransformMatrix(pos, scale, angle);
+	}
+
+	void Set_CameraPos(const glm::vec2& pos)
 	{
 		Graphics.Camera.SetCameraPos(pos);
 	}

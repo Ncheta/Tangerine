@@ -58,7 +58,8 @@ public:
 	void SetBGColor(glm::vec3& color);
 	void SetWindowSize(int width, int height);
 	void SetCurrShader(Shader* shader);
-	void SetTransformMatrix(glm::mat4& transform);
+	void SetTransformMatrix(const glm::mat4& transform);
+	void SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation);
 	Shader* CurrShader();
 	glm::vec2 GetWindowSize() const;
 	void StartDraw();

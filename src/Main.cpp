@@ -47,7 +47,8 @@ int main(void)
 	Mesh* testmesh2 = Tangerine::Create_Mesh(rectanglevertices, sizeof(rectanglevertices));
 	Tangerine::Set_CurrShader(testshader);
 	
-	float pos = 0.f;
+	float pos = 1.f;
+	float zoom = 0.f;
 	float rotation = 0.f;
 	while (!Tangerine::ShouldClose())
 	{
@@ -56,24 +57,26 @@ int main(void)
 		Tangerine::Start_Draw();
 
 		//Tangerine::Rotate_Camera(rotation);
-		glm::mat4 testmatrix = glm::mat4(1.f);
-		testmatrix = glm::scale(testmatrix,glm::vec3(100.f, 100.0f, 1.0f));
-		testmatrix = glm::translate(testmatrix,glm::vec3(pos, 0.0f, 0.0f));
-		Tangerine::Set_TransformMatrix(testmatrix);
+		//glm::mat4 testmatrix = glm::mat4(1.f);
+		//testmatrix = glm::scale(testmatrix,glm::vec3(100.f, 100.0f, 1.0f));
+		//testmatrix = glm::translate(testmatrix,glm::vec3(pos, 0.0f, 0.0f));
+		//Tangerine::Set_TransformMatrix(testmatrix);
+		Tangerine::Set_TransformData(glm::vec2(-100.f, 0.f), glm::vec2(100.f, 100.f), rotation);
 		Tangerine::Draw(testmesh);
-		pos += 0.02f;
+		//pos += 0.02f;
 
 		glm::mat4 testmatrix2 = glm::mat4(1.f);
 		testmatrix2 = glm::scale(testmatrix2, glm::vec3(100.f, 100.0f, 1.0f));
 		//testmatrix2 = glm::rotate(testmatrix2, glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0f));
 		testmatrix2 = glm::translate(testmatrix2, glm::vec3(0.f, 0.0f, 0.0f));
-		Tangerine::Set_TransformMatrix(testmatrix2);
+		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(100.f,100.f), rotation);
 		Tangerine::Draw(testmesh2);
 		++rotation;
 
 		glm::vec2 vec = glm::vec2(pos, 0.f);
-		//Tangerine::Set_CameraZoom(pos);
-		Tangerine::Set_CameraPos(vec);
+		//Tangerine::Set_CameraZoom(fabs(sinf(zoom)) + 0.1f);
+		zoom += 0.01f;
+		//Tangerine::Set_CameraPos(vec);
 
 		Tangerine::End_Draw();
 	}
@@ -81,5 +84,5 @@ int main(void)
 	Tangerine::Engine_Exit();
 
 
-	return 0; 
+	return 0;
 }

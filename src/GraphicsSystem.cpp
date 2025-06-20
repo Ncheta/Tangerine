@@ -86,9 +86,20 @@ void GraphicsSystem::SetBGColor(glm::vec3& color)
 	glClearColor(color.x, color.y, color.z, 1.0f);
 }
 
-void GraphicsSystem::SetTransformMatrix(glm::mat4& transform)
+void GraphicsSystem::SetTransformMatrix(const glm::mat4& transform)
 {
 	mTransformMatrix = transform;
+}
+
+void GraphicsSystem::SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation)
+{
+	glm::mat4 scaleMatrix = glm::scale(glm::vec3(scale, 1.0));
+	glm::mat4 rotationMatrix = glm::rotate(glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0));
+	glm::mat4 translationMatrix = glm::translate(glm::vec3(pos, 0.0));
+
+	glm::mat4 transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;
+
+	mTransformMatrix = transformationMatrix;
 }
 
 void GraphicsSystem::SetWindowSize(int width, int height)

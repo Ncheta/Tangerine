@@ -45,6 +45,7 @@ Shader* ShaderManager::CreateShader(const char* vertexPath, const char* fragPath
 		shaderList.push_back(newShader);
 		return newShader;
 	}
+	return nullptr;
 }
 void ShaderManager::ReleaseShader(Shader** shader)
 {

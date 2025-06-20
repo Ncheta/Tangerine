@@ -44,7 +44,6 @@
 void CameraObj::Init(glfwInterface& glfw)
 {
 	mWindowSize = glfw.GetWindowSize();
-	
 }
 
 glm::mat4 CameraObj::GetViewMatrix()
@@ -66,35 +65,46 @@ glm::mat4 CameraObj::GetProjectionMatrix() //@@TODO: increase near and far z's t
 
 glm::mat4 CameraObj::GetViewProjMatrix()
 {
-	
-	glm::mat4 viewprojMatrix(1.0f);
-	glm::mat4 rotationMatrix = glm::rotate(glm::radians(mRotation), glm::vec3(0.0, 0.0, 1.0));
-	glm::mat4 scaleMatrix = glm::scale(glm::vec3(mzoom, mzoom, 1.0f));
+	if (isMatrixDirty)
+	{
+		glm::mat4 viewprojMatrix(1.0f);
+		glm::mat4 rotationMatrix = glm::rotate(glm::radians(mRotation), glm::vec3(0.0, 0.0, 1.0));
+		glm::mat4 scaleMatrix = glm::scale(glm::vec3(mzoom, mzoom, 1.0f));
 
-	viewprojMatrix = GetProjectionMatrix() * rotationMatrix * scaleMatrix * GetViewMatrix();
-	return viewprojMatrix;
+		viewprojMatrix = GetProjectionMatrix() * rotationMatrix * scaleMatrix * GetViewMatrix();
+		mviewProjMatrix = viewprojMatrix;
+		isMatrixDirty = false;
+	}
+
+
+
+	return mviewProjMatrix;
 }
 
 void CameraObj::Rotate(float angle)
 {
 	mRotation = angle;
+	isMatrixDirty = true;
 }
 
 
 void CameraObj::SetWindowSize(int width, int height)
 {
 	mWindowSize = glm::vec2(width, height);
+	isMatrixDirty = true;
 }
 
-void CameraObj::SetCameraPos(glm::vec2& pos)
+void CameraObj::SetCameraPos(const glm::vec2& pos)
 {
 	mCameraPosition.x = pos.x;
 	mCameraPosition.y = pos.y;
+	isMatrixDirty = true;
 }
 
 void CameraObj::SetZoom(float zoom)
 {
 	mzoom = zoom;
+	isMatrixDirty = true;
 }
 
 
