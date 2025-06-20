@@ -8,7 +8,7 @@
 #include <vector>
 
 //// Using glad to help with loading OpenGL
-#include "glad/glad.h" //remove after adding camera and stuff just here for testing rn
+//#include "glad/glad.h" //remove after adding camera and stuff just here for testing rn
 
 
 // Using glm for math
@@ -21,7 +21,7 @@
 
 
 #include "Tangerine.h"
-#include "Texture.h"
+
 
 
 int main(void)
