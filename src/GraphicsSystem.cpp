@@ -77,6 +77,7 @@ void GraphicsSystem::Update()
 int GraphicsSystem::Exit()
 {
 	mMeshManager.ReleaseAll();
+	mTextureManager.ReleaseAll();
 	mShaderManager.ReleaseAll();
 	return 0;
 }
@@ -127,11 +128,20 @@ void GraphicsSystem::EndDraw()
 void GraphicsSystem::Draw(const Mesh* mesh)
 {
 	if (!isDrawingEnabled) return;
-	mcurrShader->Use();
-	glm::mat4 identity = glm::mat4(1.0f);
-	glm::mat4 viewproj = Camera.GetViewProjMatrix();
-	mcurrShader->SetMat4("viewprojection", viewproj);
-	mcurrShader->SetMat4("transform", mTransformMatrix);
+
+	if (mcurrShader) 
+	{
+		mcurrShader->Use();
+		glm::mat4 identity = glm::mat4(1.0f);
+		glm::mat4 viewproj = Camera.GetViewProjMatrix();
+		mcurrShader->SetMat4("viewprojection", viewproj);
+		mcurrShader->SetMat4("transform", mTransformMatrix);
+	}
+	else {}; //error stuff
+
+
+
+	if (mcurrTexture)mcurrTexture->Use();
 	mesh->Draw();
 }
 
@@ -140,7 +150,12 @@ void GraphicsSystem::SetCurrShader(Shader* shader)
 	mcurrShader = shader;
 }
 
-Shader* GraphicsSystem::CurrShader()
+void GraphicsSystem::SetCurrTexture(Texture* texture)
+{
+	mcurrTexture = texture;
+}
+
+Shader* GraphicsSystem::GetCurrShader()
 {
 	return mcurrShader;
 }

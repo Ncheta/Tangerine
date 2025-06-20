@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	GraphicsSystem.h
-// Author(s):	Ncheta Mbaraonye (ncheta.mbaraonye)
+// File Name:	Texture.h
+// Author(s):	Ncheta Mbaraonye 
 // 
 //------------------------------------------------------------------------------
 
@@ -10,16 +10,7 @@
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
-#include "glfwInterface.h"
-// Using glm for math
-#include "glm/glm.hpp"
-#include <glm/gtx/transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include "MeshManager.h"
-#include "ShaderManager.h"
-#include "TextureManager.h"
-#include "Texture.h"
-#include "Camera.h"
+#include "glad/glad.h"
 //------------------------------------------------------------------------------
 
 
@@ -44,58 +35,25 @@
 //------------------------------------------------------------------------------
 
 
-
 //------------------------------------------------------------------------------
 // Class:
 //------------------------------------------------------------------------------
 
-class GraphicsSystem
+class Texture
 {
 public:
-//Public Functions:
-	GraphicsSystem( glfwInterface& glfw); //Initialize with WindowInterface rn it's glfw
-	int Init();
-	void Update();
-	int Exit();
-	void SetBGColor(glm::vec3& color);
-	void SetWindowSize(int width, int height);
-	void SetCurrShader(Shader* shader);
-	void SetCurrTexture(Texture* texture);
-	void SetTransformMatrix(const glm::mat4& transform);
-	void SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation);
-	Shader* GetCurrShader();
-	glm::vec2 GetWindowSize() const;
-	void StartDraw();
-	void EndDraw();
-	void Draw(const Mesh* mesh);
-
+	//Public Functions:
+	Texture(const char* path);
+	~Texture();
+	void Use();
+	//Public Variables:
 	
-	
-
-//Public Variables:
-	glfwInterface& mglfw;
-	CameraObj Camera;
-	MeshManager mMeshManager;
-	ShaderManager mShaderManager;
-	TextureManager mTextureManager;
-	 
 private:
-// Private Functions:
-	static void ResizeViewport(WindowHNDL window, int width, int height);
-
-// Private Variables:
-
-	Shader* mcurrShader{nullptr};
-	Texture* mcurrTexture{ nullptr };
-	glm::mat4 mTransformMatrix{ 1 };
-	bool isDrawingEnabled{ false };
+	//Private Functions:
 	
-
+	//Private Variables:
+	GLuint mTextureID{ 0 };
 };
-
-extern GraphicsSystem* gGraphics;
-
-
 
 
 

@@ -8,7 +8,7 @@
 #include <vector>
 
 //// Using glad to help with loading OpenGL
-//#include "glad/glad.h" //remove after adding camera and stuff just here for testing rn
+#include "glad/glad.h" //remove after adding camera and stuff just here for testing rn
 
 
 // Using glm for math
@@ -17,13 +17,11 @@
 #include <glm/gtc/type_ptr.hpp>
 //// Using glfw for window handling
 //#include <glfw/glfw3.h>
-// Using stb image for image file loading
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+
 
 
 #include "Tangerine.h"
-
+#include "Texture.h"
 
 
 int main(void)
@@ -34,15 +32,17 @@ int main(void)
 		                   Vertex(glm::vec2(-0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0,0.0,0.0,1.0f)),
 						   Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0,0.0,0.0,1.0f))};
 
-	Vertex rectanglevertices[6] = { Vertex(glm::vec2(0.5f,0.5f), glm::vec2(0.0f,0.0f), glm::vec4(0.0f,1.0f,0.0f,1.0f)),
-								   Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(0.0f,0.0f,1.0f,1.0f)),
-									Vertex(glm::vec2(-0.5f,0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0f,0.0f,0.0f,1.0f)),
+	Vertex rectanglevertices[6] = { Vertex(glm::vec2(0.5f,0.5f), glm::vec2(1.0f,1.0f), glm::vec4(0.0f,1.0f,0.0f,1.0f)),
+								   Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(1.0f,0.0f), glm::vec4(0.0f,0.0f,1.0f,1.0f)),
+									Vertex(glm::vec2(-0.5f,0.5f), glm::vec2(0.0f,1.0f), glm::vec4(1.0f,0.0f,0.0f,1.0f)),
 
-									Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(0.0f,0.0f,1.0f,1.0f)),
+									Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(1.0f,0.0f), glm::vec4(0.0f,0.0f,1.0f,1.0f)),
 									Vertex(glm::vec2(-0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0f,0.0f,1.0f,1.0f)),
-									 Vertex(glm::vec2(-0.5f,0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0f,0.0f,0.0f,1.0f)) };
+									 Vertex(glm::vec2(-0.5f,0.5f), glm::vec2(0.0f,1.0f), glm::vec4(1.0f,0.0f,0.0f,1.0f)) };
 
 	Shader* testshader = Tangerine::Create_Shader("shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
+	Shader* testTexshader = Tangerine::Create_Shader("shaders/DefaultShader.vert", "shaders/DefaultShaderAltTex.frag");
+	Texture* testTexture = Tangerine::Create_Texture("assets/man.png");
 	Mesh* testmesh = Tangerine::Create_Mesh(vertices, sizeof(vertices));
 	Mesh* testmesh2 = Tangerine::Create_Mesh(rectanglevertices, sizeof(rectanglevertices));
 	Tangerine::Set_CurrShader(testshader);
@@ -56,20 +56,14 @@ int main(void)
 		Tangerine::Engine_Update();
 		Tangerine::Start_Draw();
 
-		//Tangerine::Rotate_Camera(rotation);
-		//glm::mat4 testmatrix = glm::mat4(1.f);
-		//testmatrix = glm::scale(testmatrix,glm::vec3(100.f, 100.0f, 1.0f));
-		//testmatrix = glm::translate(testmatrix,glm::vec3(pos, 0.0f, 0.0f));
-		//Tangerine::Set_TransformMatrix(testmatrix);
 		Tangerine::Set_TransformData(glm::vec2(-100.f, 0.f), glm::vec2(100.f, 100.f), rotation);
+		Tangerine::Set_CurrShader(testshader);
 		Tangerine::Draw(testmesh);
 		//pos += 0.02f;
 
-		glm::mat4 testmatrix2 = glm::mat4(1.f);
-		testmatrix2 = glm::scale(testmatrix2, glm::vec3(100.f, 100.0f, 1.0f));
-		//testmatrix2 = glm::rotate(testmatrix2, glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0f));
-		testmatrix2 = glm::translate(testmatrix2, glm::vec3(0.f, 0.0f, 0.0f));
-		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(100.f,100.f), rotation);
+		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(200.f,200.f), rotation);
+		Tangerine::Set_CurrShader(testTexshader);
+		Tangerine::Set_CurrTexture(testTexture);
 		Tangerine::Draw(testmesh2);
 		++rotation;
 

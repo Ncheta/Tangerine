@@ -123,9 +123,24 @@ namespace Tangerine
 		Graphics.mMeshManager.ReleaseMesh(mesh);
 	}
 
+	void Release_Texture(Texture** texture)
+	{
+		Graphics.mTextureManager.ReleaseTexture(texture);
+	}
+
+	Texture* Create_Texture(const char* filePath)
+	{
+		return Graphics.mTextureManager.CreateTexture(filePath);
+	}
+
 	void Set_CurrShader(Shader* shader)
 	{
 		Graphics.SetCurrShader(shader);
+	}
+
+	void Set_CurrTexture(Texture* texture)
+	{
+		Graphics.SetCurrTexture(texture);
 	}
 
 	bool ShouldClose()
