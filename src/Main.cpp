@@ -72,8 +72,8 @@ int main(void)
 		++rotation;
 
 		glm::vec2 vec = glm::vec2(pos, 0.f);
-		Tangerine::Set_CameraZoom(pos);
-		//Tangerine::Set_CameraPos(vec);
+		//Tangerine::Set_CameraZoom(pos);
+		Tangerine::Set_CameraPos(vec);
 
 		Tangerine::End_Draw();
 	}
@@ -81,5 +81,5 @@ int main(void)
 	Tangerine::Engine_Exit();
 
 
-	return 0;
+	return 0; 
 }
