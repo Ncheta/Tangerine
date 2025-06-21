@@ -49,6 +49,7 @@ public:
 	Mesh* CreateMesh(const std::string& MeshName, Vertex vertices[], size_t arraySize);
 	Mesh* GetMesh(const std::string& MeshName);
 	void ReleaseMesh(const std::string& MeshName);
+	int Init();
 
 	void ReleaseAll();
 

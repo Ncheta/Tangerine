@@ -65,7 +65,7 @@ int GraphicsSystem::Init()
 	ResizeViewport(mglfw.GetWindowHandle(), 1080, 720);
 	glm::mat4 transform = glm::scale(glm::vec3(50.f, 50.f, 1.f));
 	mTransformMatrix = transform;
-
+	mMeshManager.Init();
 	return 0;
 }
 
