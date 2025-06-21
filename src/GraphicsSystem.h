@@ -57,12 +57,14 @@ public:
 	int Init();
 	void Update();
 	int Exit();
-	void SetBGColor(glm::vec3& color);
+	void SetBGColor(const glm::vec4& color);
 	void SetWindowSize(int width, int height);
 	void SetCurrShader(Shader* shader);
 	void SetCurrTexture(Texture* texture);
 	void SetTransformMatrix(const glm::mat4& transform);
 	void SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation);
+	void SetTintColor(const glm::vec4& color);
+	void SetTextureOffset(const glm::vec2& offset);
 	Shader* GetCurrShader();
 	glm::vec2 GetWindowSize() const;
 	void StartDraw();
@@ -88,6 +90,8 @@ private:
 	Shader* mcurrShader{nullptr};
 	Texture* mcurrTexture{ nullptr };
 	glm::mat4 mTransformMatrix{ 1 };
+	glm::vec4 mTintColor{ 0.0f };
+	glm::vec2 mTextureOffset{ 0.0f };
 	bool isDrawingEnabled{ false };
 	
 

@@ -40,8 +40,7 @@ namespace Tangerine
 	void Engine_Init()
 	{
 		Graphics.Init();
-		glm::vec3 startColor = glm::vec3(0.68f, 0.85f, 0.9f);
-		Graphics.SetBGColor(startColor);
+		Graphics.SetBGColor(glm::vec4(0.68f,0.85f,0.9f,1.0f));
 	}
 
 	void Engine_Update()
@@ -64,6 +63,21 @@ namespace Tangerine
 	void End_Draw()
 	{
 		Graphics.EndDraw();
+	}
+
+	void Set_BGColor(const glm::vec4& color)
+	{
+		Graphics.SetBGColor(color);
+	}
+
+	void Set_TextureOffset(const glm::vec2& offset)
+	{
+		Graphics.SetTextureOffset(offset);
+	}
+
+	void Set_TintColor(const glm::vec4& color)
+	{
+		Graphics.SetTintColor(color);
 	}
 
 	void Set_TransformMatrix(const glm::mat4& transformMatrix)

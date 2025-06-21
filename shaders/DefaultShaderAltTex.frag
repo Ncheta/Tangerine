@@ -12,5 +12,5 @@ void main(void)
     vec4 texColor = texture(inTexture, TexCoord);
     if (texColor.a < 0.1)
         discard;
-    pixelColor = texColor * Color;
+    pixelColor = texColor + Color;
 }

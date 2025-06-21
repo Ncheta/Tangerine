@@ -12,9 +12,6 @@
 
 
 // Using glm for math
-#include "glm/glm.hpp"
-#include <glm/gtx/transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 //// Using glfw for window handling
 //#include <glfw/glfw3.h>
 
@@ -36,22 +33,25 @@ int main(void)
 	float rotation = 0.f;
 	while (!Tangerine::ShouldClose())
 	{
-		
+		//Tangerine::Set_BGColor(glm::vec4(1.0, 0.0, 0.0, 0.0));
 		Tangerine::Engine_Update();
 		Tangerine::Start_Draw();
 
 
 		Tangerine::Set_TransformData(glm::vec2(-100.f, 0.f), glm::vec2(100.f, 100.f), rotation);
 		Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultShader"));
+		Tangerine::Set_TintColor(glm::vec4(0.3, 0.7, 0.1, 0.5));
+		Tangerine::Set_TextureOffset(glm::vec2(0.0f, 0.0f));
 		Tangerine::Draw(Tangerine::Get_Mesh("TriangleMesh"));
 		//pos += 0.02f;
 
 		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(200.f,200.f), 0.f);
 		Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultTexShader"));
 		Tangerine::Set_CurrTexture(Tangerine::Get_Texture("ManTexture"));
+		Tangerine::Set_TintColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
+		Tangerine::Set_TextureOffset(glm::vec2(0.0f, 0.0f));
 		Tangerine::Draw(Tangerine::Get_Mesh("RectMesh"));
 		++rotation;
-
 		glm::vec2 vec = glm::vec2(pos, 0.f);
 		//Tangerine::Set_CameraZoom(fabs(sinf(zoom)) + 0.1f);
 		//zoom += 0.01f;

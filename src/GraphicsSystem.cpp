@@ -84,9 +84,9 @@ int GraphicsSystem::Exit()
 	return 0;
 }
 
-void GraphicsSystem::SetBGColor(glm::vec3& color)
+void GraphicsSystem::SetBGColor(const glm::vec4& color)
 {
-	glClearColor(color.x, color.y, color.z, 1.0f);
+	glClearColor(color.x, color.y, color.z, color.w);
 }
 
 void GraphicsSystem::SetTransformMatrix(const glm::mat4& transform)
@@ -103,6 +103,16 @@ void GraphicsSystem::SetTransformMatrix(const glm::vec2& pos, const glm::vec2& s
 	glm::mat4 transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
 	mTransformMatrix = transformationMatrix;
+}
+
+void GraphicsSystem::SetTintColor(const glm::vec4& color)
+{
+	mTintColor = color;
+}
+
+void GraphicsSystem::SetTextureOffset(const glm::vec2& offset)
+{
+	mTextureOffset = offset;
 }
 
 void GraphicsSystem::SetWindowSize(int width, int height)
@@ -138,6 +148,8 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 		glm::mat4 viewproj = Camera.GetViewProjMatrix();
 		mcurrShader->SetMat4("viewprojection", viewproj);
 		mcurrShader->SetMat4("transform", mTransformMatrix);
+		mcurrShader->SetVec4("tintColor", mTintColor); //@@TODO; move to the material class in future
+		mcurrShader->SetVec2("textOffset", mTextureOffset); //@@TODO: move to the material class in future
 	}
 	else {}; //error stuff
 

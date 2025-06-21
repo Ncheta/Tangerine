@@ -10,10 +10,12 @@ uniform mat4 viewprojection;
 uniform mat4 transform;
 uniform mat4 projection;
 uniform mat4 view;
+uniform vec4 tintColor;
+uniform vec2 textOffset;
 
 void main()
 {
      gl_Position =  viewprojection * transform * vec4(inPos,0.0, 1.0);
-     Color = inColor;
-     TexCoord = inTexCoord;
+     Color = inColor + (tintColor * tintColor.w);
+     TexCoord = inTexCoord + textOffset;
 }

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	stub.h
+// File Name:	Tangerine.h
 // Author(s):	Ncheta Mbaraonye 
 // 
 //------------------------------------------------------------------------------
@@ -70,8 +70,10 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Engine_Update();
 	void Engine_Exit();
 	void Start_Draw();
-
 	void End_Draw();
+	void Set_BGColor(const glm::vec4& color);
+	void Set_TextureOffset(const glm::vec2& offset);
+	void Set_TintColor(const glm::vec4& color);
 	void Set_TransformMatrix(const glm::mat4& transformMatrix);
 	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle);
 	void Set_CameraPos(const glm::vec2& pos);
