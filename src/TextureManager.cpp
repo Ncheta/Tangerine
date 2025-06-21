@@ -78,15 +78,18 @@ void TextureManager::ReleaseTexture(const std::string& textureName)
 	}
 
 	delete iter->second;
+	iter->second = nullptr;
 	TextureList.erase(textureName);
 }
 
 void TextureManager::ReleaseAll()
 {
-	for (auto Texture : TextureList)
+	for (auto& Texture : TextureList)
 	{
-		ReleaseTexture(Texture.first);
+		delete Texture.second;
+		Texture.second = nullptr;
 	}
+	TextureList.clear();
 }
 
 
