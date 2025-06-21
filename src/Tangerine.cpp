@@ -113,14 +113,19 @@ namespace Tangerine
 		Graphics.mShaderManager.ReleaseShader(name);
 	}
 
-	Mesh* Create_Mesh(Vertex vertices[], size_t arraySize)
+	Mesh* Get_Mesh(const std::string& name)
 	{
-		return Graphics.mMeshManager.CreateMesh(vertices, arraySize);
+		return Graphics.mMeshManager.GetMesh(name);
 	}
 
-	void Release_Mesh(Mesh** mesh)
+	Mesh* Create_Mesh(const std::string& name, Vertex vertices[], size_t arraySize)
 	{
-		Graphics.mMeshManager.ReleaseMesh(mesh);
+		return Graphics.mMeshManager.CreateMesh(name, vertices, arraySize);
+	}
+
+	void Release_Mesh(const std::string& name)
+	{
+		Graphics.mMeshManager.ReleaseMesh(name);
 	}
 
 	void Release_Texture(const std::string& name)

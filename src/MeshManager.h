@@ -10,8 +10,10 @@
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
-#include <vector>
+#include <unordered_map>
+#include <string>
 #include "Mesh.h"
+
 //------------------------------------------------------------------------------
 
 
@@ -44,8 +46,9 @@ class MeshManager
 {
 public:
 	//Public Functions:
-	Mesh* CreateMesh(Vertex vertices[], size_t arraySize);
-	void ReleaseMesh(Mesh** mesh);
+	Mesh* CreateMesh(const std::string& MeshName, Vertex vertices[], size_t arraySize);
+	Mesh* GetMesh(const std::string& MeshName);
+	void ReleaseMesh(const std::string& MeshName);
 
 	void ReleaseAll();
 
@@ -54,7 +57,10 @@ private:
 	//Private Functions:
 
 	//Private Variables:
-	std::vector<Mesh*> meshList;
+	std::unordered_map<std::string, Mesh*> MeshList;
 };
+
+
+
 
 
