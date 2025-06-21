@@ -10,9 +10,9 @@
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
-#include <vector>
+#include <unordered_map>
 #include <string>
-#include "shader.h"
+#include "Shader.h"
 
 //------------------------------------------------------------------------------
 
@@ -46,8 +46,9 @@ class ShaderManager
 {
 public:
 	//Public Functions:
-	Shader* CreateShader(const char* vertexPath, const char* fragPath);
-	void ReleaseShader(Shader** shader);
+	Shader* CreateShader(const std::string& ShaderName, const char* vertPath, const char* fragPath);
+	Shader* GetShader(const std::string& ShaderName);
+	void ReleaseShader(const std::string& ShaderName);
 
 	void ReleaseAll();
 
@@ -56,7 +57,7 @@ private:
 	//Private Functions:
 
 	//Private Variables:
-	std::vector<Shader*> shaderList;
+	std::unordered_map<std::string, Shader*> ShaderList;
 };
 
 

@@ -5,7 +5,9 @@
 //
 //------------------------------------------------------------------------------
 
+#include <iterator>
 #include "ShaderManager.h"
+#include <iostream>
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -36,32 +38,58 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
-Shader* ShaderManager::CreateShader(const char* vertexPath, const char* fragPath)
+Shader* ShaderManager::CreateShader(const std::string& ShaderName, const char* vertPath, const char* fragPath)
 {
-	Shader* newShader = new Shader(vertexPath, fragPath);
-
-	if (newShader)
+	auto iter = ShaderList.find(ShaderName);
+	if ((iter == ShaderList.end()) ||
+		(iter != ShaderList.end() && iter->second == nullptr))
 	{
-		shaderList.push_back(newShader);
-		return newShader;
+		Shader* newShader = new Shader(vertPath, fragPath);
+
+		if (newShader)
+		{
+			ShaderList[ShaderName] = newShader;
+			return newShader;
+		}
+
 	}
 	return nullptr;
 }
-void ShaderManager::ReleaseShader(Shader** shader)
+Shader* ShaderManager::GetShader(const std::string& ShaderName)
 {
-	delete* shader;
-	*shader = NULL;
+	auto iter = ShaderList.find(ShaderName);
+	if (iter == ShaderList.end())
+	{
+		//error handling
+		std::cout << "Shader: " << ShaderName << " does not exist." << std::endl;
+		return nullptr;
+	}
+
+	return iter->second;
+}
+void ShaderManager::ReleaseShader(const std::string& ShaderName)
+{
+	auto iter = ShaderList.find(ShaderName);
+	if (iter == ShaderList.end())
+	{
+		//error handling
+		std::cout << "Shader: " << ShaderName << " does not exist." << std::endl;
+		return;
+	}
+
+	delete iter->second;
+	iter->second = nullptr;
+	ShaderList.erase(ShaderName);
 }
 
 void ShaderManager::ReleaseAll()
 {
-	for (Shader* shader : shaderList)
+	for (auto& Shader : ShaderList)
 	{
-		if (shader)
-		{
-			ReleaseShader(&shader);
-		}
+		delete Shader.second;
+		Shader.second = nullptr;
 	}
+	ShaderList.clear();
 }
 
 

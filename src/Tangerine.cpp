@@ -103,14 +103,14 @@ namespace Tangerine
 		Graphics.Camera.Rotate(angle);
 	}
 
-	Shader* Create_Shader(const char* vertPath, const char* fragPath)
+	Shader* Create_Shader(const std::string& name,const char* vertPath, const char* fragPath)
 	{
-		return Graphics.mShaderManager.CreateShader(vertPath, fragPath);
+		return Graphics.mShaderManager.CreateShader(name, vertPath, fragPath);
 	}
 
-	void Release_Shader(Shader** shader)
+	void Release_Shader(const std::string& name)
 	{
-		Graphics.mShaderManager.ReleaseShader(shader);
+		Graphics.mShaderManager.ReleaseShader(name);
 	}
 
 	Mesh* Create_Mesh(Vertex vertices[], size_t arraySize)
@@ -131,6 +131,11 @@ namespace Tangerine
 	Texture* Get_Texture(const std::string& name)
 	{
 		return Graphics.mTextureManager.GetTexture(name);
+	}
+
+	Shader* Get_Shader(const std::string& name)
+	{
+		return Graphics.mShaderManager.GetShader(name);
 	}
 
 	Texture* Create_Texture(const std::string& name, const char* filePath)
