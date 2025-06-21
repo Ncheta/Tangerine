@@ -66,6 +66,8 @@ int GraphicsSystem::Init()
 	glm::mat4 transform = glm::scale(glm::vec3(50.f, 50.f, 1.f));
 	mTransformMatrix = transform;
 	mMeshManager.Init();
+	mTextureManager.Init();
+	mShaderManager.Init();
 	return 0;
 }
 

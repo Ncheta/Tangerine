@@ -9,6 +9,7 @@
 #include "TextureManager.h"
 #include <iostream>
 
+
 //------------------------------------------------------------------------------
 // Private Constants:
 //------------------------------------------------------------------------------
@@ -80,6 +81,12 @@ void TextureManager::ReleaseTexture(const std::string& textureName)
 	delete iter->second;
 	iter->second = nullptr;
 	TextureList.erase(textureName);
+}
+
+int TextureManager::Init()
+{
+	Texture::stbiInit();
+	return 0;
 }
 
 void TextureManager::ReleaseAll()

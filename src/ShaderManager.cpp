@@ -82,6 +82,14 @@ void ShaderManager::ReleaseShader(const std::string& ShaderName)
 	ShaderList.erase(ShaderName);
 }
 
+int ShaderManager::Init()
+{
+	Shader* defaultShader = CreateShader("DefaultShader", "shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
+	Shader* defaultTexshader = CreateShader("DefaultTexShader", "shaders/DefaultShader.vert", "shaders/DefaultShaderAltTex.frag");
+
+	return 0;
+}
+
 void ShaderManager::ReleaseAll()
 {
 	for (auto& Shader : ShaderList)

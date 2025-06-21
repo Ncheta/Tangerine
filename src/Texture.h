@@ -46,6 +46,7 @@ public:
 	Texture(const char* path);
 	~Texture();
 	void Use();
+	static void stbiInit();
 	//Public Variables:
 	
 private:

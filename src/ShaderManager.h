@@ -49,6 +49,7 @@ public:
 	Shader* CreateShader(const std::string& ShaderName, const char* vertPath, const char* fragPath);
 	Shader* GetShader(const std::string& ShaderName);
 	void ReleaseShader(const std::string& ShaderName);
+	int Init();
 
 	void ReleaseAll();
 

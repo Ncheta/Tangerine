@@ -90,6 +90,13 @@ void Texture::Use() //@@TODO: this and probably all use functions should have so
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
 }
 
+void Texture::stbiInit()
+{
+	stbi_set_flip_vertically_on_load(true);
+}
+
+
+
 
 
 

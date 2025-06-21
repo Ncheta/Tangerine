@@ -28,15 +28,8 @@ int main(void)
 {
 
 	Tangerine::Engine_Init();
-
-
-	Shader* testshader = Tangerine::Create_Shader("DefaultShader","shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
-	Shader* testTexshader = Tangerine::Create_Shader("DefaultTexShader", "shaders/DefaultShader.vert", "shaders/DefaultShaderAltTex.frag");
 	Texture* testTexture = Tangerine::Create_Texture("ManTexture","assets/man.png");
-
-
-
-	Tangerine::Set_CurrShader(testshader);
+	Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultShader"));
 	
 	float pos = 1.f;
 	float zoom = 0.f;
@@ -53,7 +46,7 @@ int main(void)
 		Tangerine::Draw(Tangerine::Get_Mesh("TriangleMesh"));
 		//pos += 0.02f;
 
-		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(200.f,200.f), rotation);
+		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(200.f,200.f), 0.f);
 		Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultTexShader"));
 		Tangerine::Set_CurrTexture(Tangerine::Get_Texture("ManTexture"));
 		Tangerine::Draw(Tangerine::Get_Mesh("RectMesh"));
@@ -61,7 +54,7 @@ int main(void)
 
 		glm::vec2 vec = glm::vec2(pos, 0.f);
 		//Tangerine::Set_CameraZoom(fabs(sinf(zoom)) + 0.1f);
-		zoom += 0.01f;
+		//zoom += 0.01f;
 		//Tangerine::Set_CameraPos(vec);
 
 		Tangerine::End_Draw();

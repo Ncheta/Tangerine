@@ -49,6 +49,7 @@ public:
 	Texture* CreateTexture(const std::string& textureName, const char* path);
 	Texture* GetTexture(const std::string& textureName);
 	void ReleaseTexture(const std::string& textureName);
+	int Init();
 
 	void ReleaseAll();
 
