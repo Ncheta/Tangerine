@@ -10,7 +10,7 @@
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
-#include <vector>
+#include <unordered_map>
 #include <string>
 #include "Texture.h"
 
@@ -46,8 +46,9 @@ class TextureManager
 {
 public:
 	//Public Functions:
-	Texture* CreateTexture(const char* path);
-	void ReleaseTexture(Texture** Texture);
+	Texture* CreateTexture(const std::string& textureName, const char* path);
+	Texture* GetTexture(const std::string& textureName);
+	void ReleaseTexture(const std::string& textureName);
 
 	void ReleaseAll();
 
@@ -56,7 +57,7 @@ private:
 	//Private Functions:
 
 	//Private Variables:
-	std::vector<Texture*> TextureList;
+	std::unordered_map<std::string,Texture*> TextureList;
 };
 
 

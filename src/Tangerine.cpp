@@ -123,14 +123,19 @@ namespace Tangerine
 		Graphics.mMeshManager.ReleaseMesh(mesh);
 	}
 
-	void Release_Texture(Texture** texture)
+	void Release_Texture(const std::string& name)
 	{
-		Graphics.mTextureManager.ReleaseTexture(texture);
+		Graphics.mTextureManager.ReleaseTexture(name);
 	}
 
-	Texture* Create_Texture(const char* filePath)
+	Texture* Get_Texture(const std::string& name)
 	{
-		return Graphics.mTextureManager.CreateTexture(filePath);
+		return Graphics.mTextureManager.GetTexture(name);
+	}
+
+	Texture* Create_Texture(const std::string& name, const char* filePath)
+	{
+		return Graphics.mTextureManager.CreateTexture(name, filePath);
 	}
 
 	void Set_CurrShader(Shader* shader)

@@ -45,7 +45,7 @@ typedef struct Vertex Vertex;
 
 
 
-class Mesh
+class Mesh //@@TODO: IndexedMeshes
 {
 public:
 	//Public Functions

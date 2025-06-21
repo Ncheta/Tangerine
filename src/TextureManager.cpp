@@ -5,7 +5,9 @@
 //
 //------------------------------------------------------------------------------
 
+#include <iterator>
 #include "TextureManager.h"
+#include <iostream>
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -36,31 +38,54 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
-Texture* TextureManager::CreateTexture(const char* path)
+Texture* TextureManager::CreateTexture(const std::string& textureName,const char* path)
 {
-	Texture* newTexture = new Texture(path);
-
-	if (newTexture)
+	auto iter = TextureList.find(textureName);
+	if ( (iter == TextureList.end()) || 
+		(iter != TextureList.end() && iter->second == nullptr))
 	{
-		TextureList.push_back(newTexture);
-		return newTexture;
+		Texture* newTexture = new Texture(path);
+
+		if (newTexture)
+		{
+			TextureList[textureName] = newTexture;
+			return newTexture;
+		}
+		
 	}
 	return nullptr;
 }
-void TextureManager::ReleaseTexture(Texture** Texture)
+Texture* TextureManager::GetTexture(const std::string& textureName)
 {
-	delete* Texture;
-	*Texture = NULL;
+	auto iter = TextureList.find(textureName);
+	if (iter == TextureList.end()) 
+	{
+		//error handling
+		std::cout << "TEXTURE: " << textureName << " does not exist." << std::endl;
+		return nullptr;
+	}
+
+	return iter->second;	
+}
+void TextureManager::ReleaseTexture(const std::string& textureName)
+{
+	auto iter = TextureList.find(textureName);
+	if (iter == TextureList.end())
+	{
+		//error handling
+		std::cout << "TEXTURE: " << textureName << " does not exist." << std::endl;
+		return;
+	}
+
+	delete iter->second;
+	TextureList.erase(textureName);
 }
 
 void TextureManager::ReleaseAll()
 {
-	for (Texture* Texture : TextureList)
+	for (auto Texture : TextureList)
 	{
-		if (Texture)
-		{
-			ReleaseTexture(&Texture);
-		}
+		ReleaseTexture(Texture.first);
 	}
 }
 

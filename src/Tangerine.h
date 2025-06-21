@@ -78,12 +78,13 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Set_CameraZoom(float zoom);
 	void Rotate_Camera(float angle);
 	Shader* Create_Shader(const char* vertPath, const char* fragPath);
-	Texture* Create_Texture(const char* filePath);
+	Texture* Create_Texture(const std::string& name,const char* filePath);
 	Mesh* Create_Mesh(Vertex vertices[], size_t arraySize);
 	void Release_Shader(Shader** shader);
 	void Draw(const Mesh* mesh);
 	void Release_Mesh(Mesh** mesh);
-	void Release_Texture(Texture** texture);
+	void Release_Texture(const std::string& name);
+	Texture* Get_Texture(const std::string& name);
 
 	void Set_CurrShader(Shader* shader);
 	void Set_CurrTexture(Texture* texture);

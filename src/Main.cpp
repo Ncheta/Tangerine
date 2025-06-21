@@ -42,7 +42,7 @@ int main(void)
 
 	Shader* testshader = Tangerine::Create_Shader("shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
 	Shader* testTexshader = Tangerine::Create_Shader("shaders/DefaultShader.vert", "shaders/DefaultShaderAltTex.frag");
-	Texture* testTexture = Tangerine::Create_Texture("assets/man.png");
+	Texture* testTexture = Tangerine::Create_Texture("ManTexture","assets/man.png");
 	Mesh* testmesh = Tangerine::Create_Mesh(vertices, sizeof(vertices));
 	Mesh* testmesh2 = Tangerine::Create_Mesh(rectanglevertices, sizeof(rectanglevertices));
 	Tangerine::Set_CurrShader(testshader);
@@ -63,7 +63,7 @@ int main(void)
 
 		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(200.f,200.f), rotation);
 		Tangerine::Set_CurrShader(testTexshader);
-		Tangerine::Set_CurrTexture(testTexture);
+		Tangerine::Set_CurrTexture(Tangerine::Get_Texture("ManTexture"));
 		Tangerine::Draw(testmesh2);
 		++rotation;
 
