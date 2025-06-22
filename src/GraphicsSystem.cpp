@@ -69,6 +69,10 @@ int GraphicsSystem::Init()
 	mMeshManager.Init();
 	mTextureManager.Init();
 	mShaderManager.Init();
+	mMaterialManager.Init();
+
+	mcurrMaterial = mMaterialManager.GetMaterial("SmoothPlastic");
+	mcurrShader = mShaderManager.GetShader("DefaultShader");
 	return 0;
 }
 
@@ -125,12 +129,32 @@ void GraphicsSystem::InScreenSpace(bool inScreen)
 
 void GraphicsSystem::SetCurrMatTintColor(const glm::vec4& color)
 {
-	mcurrMaterial->SetMaterialTint(color);
+	if (mcurrMaterial)
+	{
+		mcurrMaterial->SetMaterialTint(color);
+	}
+	else
+	{
+		std::cout << "CURR MATERIAL IS NULL" << std::endl;
+	}
 }
 
 void GraphicsSystem::SetCurrMatTextureOffset(const glm::vec2& offset)
 {
-	mcurrMaterial->SetMaterialTextureOffset(offset);
+	if (mcurrMaterial)
+	{
+		mcurrMaterial->SetMaterialTextureOffset(offset);
+	}
+	else
+	{
+		std::cout << "CURR MATERIAL IS NULL" << std::endl;
+	}
+	
+}
+
+void GraphicsSystem::SetCurrMatShader(Shader* shader)
+{
+	mcurrMaterial->SetMaterialShader(shader);
 }
 
 void GraphicsSystem::SetWindowSize(int width, int height)
@@ -177,11 +201,7 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 	mcurrShader->SetVec4("tintColor", mcurrMaterial->GetTintColor()); //@@TODO; move to the material class in future
 	mcurrShader->SetVec2("textOffset", mcurrMaterial->GetTextureOffset()); //@@TODO: move to the material class in future
 	
-	if (mcurrMaterial->GetTexture())
-	{
-		mcurrMaterial->GetTexture()->Use();
-	}
-
+	if (mcurrMaterial && mcurrMaterial->GetTexture()) mcurrMaterial->GetTexture()->Use();
 	mesh->Draw();
 }
 
@@ -236,6 +256,7 @@ Shader* GraphicsSystem::GetAppropriateShader()
 	if (mcurrMaterial->GetShader())
 	{
 		whichShader = mcurrMaterial->GetShader();
+		mGlobalShadermode = GlobalShaderMode::CUSTOM;
 	}
 
 	return whichShader;

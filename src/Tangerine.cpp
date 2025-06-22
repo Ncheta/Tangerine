@@ -80,6 +80,16 @@ namespace Tangerine
 		material->SetMaterialTextureOffset(offset);
 	}
 
+	void Set_MaterialShader(Material* material, Shader* shader)
+	{
+		material->SetMaterialShader(shader);
+	}
+
+	void Set_CurrMatShader(Shader* shader)
+	{
+		Graphics.SetCurrMatShader(shader);
+	}
+
 	void Set_CurrMatTintColor(const glm::vec4& color)
 	{
 		Graphics.SetCurrMatTintColor(color);
@@ -170,6 +180,26 @@ namespace Tangerine
 	void Release_Mesh(const std::string& name)
 	{
 		Graphics.mMeshManager.ReleaseMesh(name);
+	}
+
+	Material* Get_Material(const std::string& name)
+	{
+		return Graphics.mMaterialManager.GetMaterial(name);
+	}
+
+	Material* Create_Material(const std::string& name,Texture* texture)
+	{
+		return Graphics.mMaterialManager.CreateMaterial(name, texture);
+	}
+
+	Material* Create_Material(const std::string& name, Texture* texture, Shader* shader = nullptr)
+	{
+		return Graphics.mMaterialManager.CreateMaterial(name, texture, shader);
+	}
+
+	void Release_Material(const std::string& name)
+	{
+		Graphics.mMaterialManager.ReleaseMaterial(name);
 	}
 
 	void Release_Texture(const std::string& name)

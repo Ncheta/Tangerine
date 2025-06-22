@@ -67,6 +67,12 @@ Mesh* MeshManager::CreateMesh(const std::string& MeshName, Vertex vertices[], si
 		}
 
 	}
+
+	if (iter != MeshList.end() && iter->second)
+	{
+		std::cout << "MESH: " << MeshName << "already exists." << "\n"
+			<< "PLEASE RELEASE IT FIRST" << std::endl;
+	}
 	return nullptr;
 }
 

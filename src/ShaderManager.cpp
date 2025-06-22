@@ -53,15 +53,19 @@ Shader* ShaderManager::CreateShader(const std::string& ShaderName, const char* v
 		}
 
 	}
+
+	if (iter != ShaderList.end() && iter->second)
+	{
+		std::cout << "SHADER: " << ShaderName << "already exists." << "\n"
+			<< "PLEASE RELEASE IT FIRST" << std::endl;
+	}
+
 	return nullptr;
 }
 
 Shader* ShaderManager::CreateCustomShader(const std::string& ShaderName, const char* vertPath, const char* fragPath)
 {
-	if (ShaderName == "DefaultShader")
-	{
-		return nullptr;
-	}
+
 	return CreateShader(ShaderName, vertPath, fragPath);
 }
 

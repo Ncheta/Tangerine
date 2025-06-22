@@ -18,9 +18,10 @@
 #include "MeshManager.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
+#include "MaterialManager.h"
 #include "Camera.h"
 #include "Tangerine.h"
-#include "Material.h"
+
 //------------------------------------------------------------------------------
 
 
@@ -50,7 +51,7 @@
 // Class:
 //------------------------------------------------------------------------------
 
-class GraphicsSystem
+class GraphicsSystem //@@TODO: error handling for all pointer usages
 {
 public:
 
@@ -71,6 +72,7 @@ public:
 	void InScreenSpace(bool InScreen);
 	void SetCurrMatTintColor(const glm::vec4& color);
 	void SetCurrMatTextureOffset(const glm::vec2& offset);
+	void SetCurrMatShader(Shader* shader);
 	Shader* GetCurrShader();
 	Material* GetCurrMaterial();
 	glm::vec2 GetWindowSize() const;
@@ -89,6 +91,7 @@ public:
 	MeshManager mMeshManager;
 	ShaderManager mShaderManager;
 	TextureManager mTextureManager;
+	MaterialManager mMaterialManager;
 	 
 private:
 // Private Functions:

@@ -81,9 +81,16 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void End_Draw();
 	void Set_BGColor(const glm::vec4& color);
 	void Set_CurrMatTextureOffset(const glm::vec2& offset);
+	
+	void Set_CurrMatShader(Shader* shader);
+
 	void Set_CurrMatTintColor(const glm::vec4& color);
+	
 	void Set_TransformMatrix(const glm::mat4& transformMatrix);
-	void Set_MaterialTexture(Material* material, Texture* texture);
+
+	void Set_MaterialTextureOffset(Material* material, const glm::vec2& offset);
+	void Set_MaterialTintColor(Material& material, const glm::vec4& color);
+	void Set_MaterialTexture(Material& material, Texture* texture);
 	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle);
 	void Set_CameraPos(const glm::vec2& pos);
 	void Set_CameraZoom(float zoom);
@@ -95,13 +102,21 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	Mesh* Create_Mesh(const std::string& name, Vertex vertices[], size_t arraySize);
 	Texture* Create_Texture(const std::string& name,const char* filePath);
 	Shader* Create_Shader(const std::string& name,const char* vertPath, const char* fragPath);
+	Material* Create_Material(const std::string& name, Texture* texture);
+	Material* Create_Material(const std::string& name, Texture* texture, Shader* shader);
 	void Draw(const Mesh* mesh);
 	void Release_Mesh(const std::string& name);
+
+
+	void Release_Material(const std::string& name);
 	void Release_Texture(const std::string& name);
 	void Release_Shader(const std::string& name);
+
 	Mesh* Get_Mesh(const std::string& name);
 	Texture* Get_Texture(const std::string& name);
 	Shader* Get_Shader(const std::string& name);
+	Material* Get_Material(const std::string& name);
+
 	glm::vec2 Get_WindowSize();
 	glm::vec2 ScreenToWorld(const glm::vec2& pos);
 

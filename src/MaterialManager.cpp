@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	TextureManager.cpp
+// File Name:	MaterialManager.cpp
 // Author(s):	Ncheta Mbaraonye 
 //
 //------------------------------------------------------------------------------
 
 #include <iterator>
-#include "TextureManager.h"
+#include "MaterialManager.h"
 #include <iostream>
 
 
@@ -39,70 +39,77 @@
 // Private Functions:
 //------------------------------------------------------------------------------
 
-Texture* TextureManager::CreateTexture(const std::string& textureName,const char* path)
-{
-	auto iter = TextureList.find(textureName);
-	if ( (iter == TextureList.end()) || 
-		(iter != TextureList.end() && iter->second == nullptr))
-	{
-		Texture* newTexture = new Texture(path);
 
-		if (newTexture)
+Material* MaterialManager::CreateMaterial(const std::string& MaterialName, Texture* texture, Shader* shader)
+{
+	auto iter = MaterialList.find(MaterialName);
+	if ( (iter == MaterialList.end()) || 
+		(iter != MaterialList.end() && iter->second == nullptr))
+	{
+		Material* newMaterial = new Material(texture, shader);
+
+		if (newMaterial)
 		{
-			TextureList[textureName] = newTexture;
-			return newTexture;
+			MaterialList[MaterialName] = newMaterial;
+			return newMaterial;
 		}
 		
 	}
 
-	if (iter != TextureList.end() && iter->second)
+	if (iter != MaterialList.end() && iter->second)
 	{
-		std::cout << "TEXTURE: " << textureName << "already exists." << "\n"
+		std::cout << "MATERIAL: " << MaterialName << "already exists." << "\n"
 			<< "PLEASE RELEASE IT FIRST" << std::endl;
 	}
 	return nullptr;
 }
-Texture* TextureManager::GetTexture(const std::string& textureName)
+
+Material* MaterialManager::CreateMaterial(const std::string& MaterialName)
 {
-	auto iter = TextureList.find(textureName);
-	if (iter == TextureList.end()) 
+	return CreateMaterial(MaterialName, nullptr, nullptr);
+}
+Material* MaterialManager::GetMaterial(const std::string& MaterialName)
+{
+	auto iter = MaterialList.find(MaterialName);
+	if (iter == MaterialList.end()) 
 	{
 		//error handling
-		std::cout << "TEXTURE: " << textureName << " does not exist." << std::endl;
+		std::cout << "Material: " << MaterialName << " does not exist." << std::endl;
 		return nullptr;
 	}
 
 	return iter->second;	
 }
-void TextureManager::ReleaseTexture(const std::string& textureName)
+void MaterialManager::ReleaseMaterial(const std::string& MaterialName)
 {
-	auto iter = TextureList.find(textureName);
-	if (iter == TextureList.end())
+	auto iter = MaterialList.find(MaterialName);
+	if (iter == MaterialList.end())
 	{
 		//error handling
-		std::cout << "TEXTURE: " << textureName << " does not exist." << std::endl;
+		std::cout << "Material: " << MaterialName << " does not exist." << std::endl;
 		return;
 	}
 
 	delete iter->second;
 	iter->second = nullptr;
-	TextureList.erase(textureName);
+	MaterialList.erase(MaterialName);
 }
 
-int TextureManager::Init()
+int MaterialManager::Init()
 {
-	Texture::stbiInit();
+	Material* DefaultMat = CreateMaterial("SmoothPlastic");
+	DefaultMat->SetMaterialTint(glm::vec4(1.f, 0.7f, 0.7f, 1.f));
 	return 0;
 }
 
-void TextureManager::ReleaseAll()
+void MaterialManager::ReleaseAll()
 {
-	for (auto& Texture : TextureList)
+	for (auto& Material : MaterialList)
 	{
-		delete Texture.second;
-		Texture.second = nullptr;
+		delete Material.second;
+		Material.second = nullptr;
 	}
-	TextureList.clear();
+	MaterialList.clear();
 }
 
 
