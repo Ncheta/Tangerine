@@ -29,6 +29,7 @@ int main(void)
 	Texture* testTexture = Tangerine::Create_Texture("ManTexture","assets/man.png");
 	Shader* testShader = Tangerine::Create_Shader("test", "shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
 	Material* man = Tangerine::Create_Material("man", Tangerine::Get_Texture("ManTexture"));
+
 	//Tangerine::Set_MaterialTextureOffset(man, glm::vec2(1.0, 0.5));
 	
 	float pos = 1.f;

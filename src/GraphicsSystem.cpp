@@ -191,15 +191,15 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 	
 	
 	mcurrShader = GetAppropriateShader();
-	if (mGlobalShadermode == GlobalShaderMode::CUSTOM)
+	if (mGlobalShadermode == GlobalShaderMode::CUSTOM || mcurrMaterial->GetShader())
 	{
 		mcurrShader->SetCustomUniforms();
 	}
 	mcurrShader->Use();
 	SetCommonUniforms();
 
-	mcurrShader->SetVec4("tintColor", mcurrMaterial->GetTintColor()); //@@TODO; move to the material class in future
-	mcurrShader->SetVec2("textOffset", mcurrMaterial->GetTextureOffset()); //@@TODO: move to the material class in future
+	mcurrShader->SetVec4("tintColor", mcurrMaterial->GetTintColor()); //@@TODO: when there's a number of material uniforms just make a 
+	mcurrShader->SetVec2("textOffset", mcurrMaterial->GetTextureOffset()); //set material uniforms function
 	
 	if (mcurrMaterial && mcurrMaterial->GetTexture()) mcurrMaterial->GetTexture()->Use();
 	mesh->Draw();
@@ -256,7 +256,6 @@ Shader* GraphicsSystem::GetAppropriateShader()
 	if (mcurrMaterial->GetShader())
 	{
 		whichShader = mcurrMaterial->GetShader();
-		mGlobalShadermode = GlobalShaderMode::CUSTOM;
 	}
 
 	return whichShader;
