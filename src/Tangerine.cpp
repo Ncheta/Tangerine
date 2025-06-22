@@ -100,6 +100,21 @@ namespace Tangerine
 		Graphics.Camera.SetZoom(zoom);
 	}
 
+	void Set_WindowSize(const glm::vec2& windowSize)
+	{
+		Graphics.Camera.SetWindowSize(windowSize.x, windowSize.y);
+	}
+
+	void Set_WindowSize(int width, int height)
+	{
+		Graphics.Camera.SetWindowSize(width, height);
+	}
+
+	void Set_ScreenSpaceDraw(bool draw)
+	{
+		Graphics.InScreenSpace(draw);
+	}
+
 	void Draw(const Mesh* mesh)
 	{
 		if (!mesh)
@@ -155,6 +170,16 @@ namespace Tangerine
 	Shader* Get_Shader(const std::string& name)
 	{
 		return Graphics.mShaderManager.GetShader(name);
+	}
+
+	glm::vec2 Get_WindowSize()
+	{
+		return Graphics.Camera.GetWindowSize();
+	}
+
+	glm::vec2 ScreenToWorld(const glm::vec2& pos)
+	{
+		return Graphics.ScreentoWorld(pos);
 	}
 
 	Texture* Create_Texture(const std::string& name, const char* filePath)

@@ -63,48 +63,72 @@ glm::mat4 CameraObj::GetProjectionMatrix() //@@TODO: increase near and far z's t
 	return projection;
 }
 
-glm::mat4 CameraObj::GetViewProjMatrix()
+glm::mat4 CameraObj::GetWorldViewProjMatrix()
 {
-	if (isMatrixDirty)
+	if (isWorldMatrixDirty)
 	{
 		glm::mat4 viewprojMatrix(1.0f);
 		glm::mat4 rotationMatrix = glm::rotate(glm::radians(mRotation), glm::vec3(0.0, 0.0, 1.0));
 		glm::mat4 scaleMatrix = glm::scale(glm::vec3(mzoom, mzoom, 1.0f));
 
 		viewprojMatrix = GetProjectionMatrix() * rotationMatrix * scaleMatrix * GetViewMatrix();
-		mviewProjMatrix = viewprojMatrix;
-		isMatrixDirty = false;
+		mworldViewProjMatrix = viewprojMatrix;
+		isWorldMatrixDirty = false;
 	}
 
 
+	return mworldViewProjMatrix;
+}
 
-	return mviewProjMatrix;
+glm::mat4 CameraObj::GetScreenViewProjMatrix()
+{
+	if (isScreenMatrixDirty)
+	{
+		glm::mat4 viewprojMatrix(1.0f);
+		glm::mat4 viewMatrix(1.0f);
+		glm::mat4 projection = glm::ortho(
+				0.f, mWindowSize.x,
+				0.f, mWindowSize.y, -1.f, 1.f
+			);
+		viewprojMatrix = projection * viewMatrix;
+		mscreenViewProjMatrix = viewprojMatrix;
+		isScreenMatrixDirty = false;
+	}
+
+	return mscreenViewProjMatrix;
+}
+
+glm::vec2 CameraObj::GetWindowSize()
+{
+	return mWindowSize;
 }
 
 void CameraObj::Rotate(float angle)
 {
 	mRotation = angle;
-	isMatrixDirty = true;
+	isWorldMatrixDirty = true;
 }
 
 
 void CameraObj::SetWindowSize(int width, int height)
 {
 	mWindowSize = glm::vec2(width, height);
-	isMatrixDirty = true;
+	gGraphics->mglfw.SetWindowSize(width, height);
+	isWorldMatrixDirty = true;
+	isScreenMatrixDirty = true;
 }
 
 void CameraObj::SetCameraPos(const glm::vec2& pos)
 {
 	mCameraPosition.x = pos.x;
 	mCameraPosition.y = pos.y;
-	isMatrixDirty = true;
+	isWorldMatrixDirty = true;
 }
 
 void CameraObj::SetZoom(float zoom)
 {
 	mzoom = zoom;
-	isMatrixDirty = true;
+	isWorldMatrixDirty = true;
 }
 
 

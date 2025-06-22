@@ -1,11 +1,13 @@
 #version 330 core
 
 in vec2 TexCoord;
-in vec4 Color; //@@TODO: replace this with some kind of tint system? or add a seperate tint system?
+in vec4 Color;
 
 out vec4 pixelColor;
 
 uniform sampler2D inTexture;
+
+//CUSTOM UNIFORMS
 
 void main(void) 
 {
@@ -13,4 +15,5 @@ void main(void)
     if (texColor.a < 0.1)
         discard;
     pixelColor = texColor + Color;
+
 }

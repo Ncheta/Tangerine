@@ -28,9 +28,12 @@ int main(void)
 	Texture* testTexture = Tangerine::Create_Texture("ManTexture","assets/man.png");
 	Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultShader"));
 	
+	
 	float pos = 1.f;
 	float zoom = 0.f;
 	float rotation = 0.f;
+	float tint = 0.3f;
+	float offset = 0.0f;
 	while (!Tangerine::ShouldClose())
 	{
 		//Tangerine::Set_BGColor(glm::vec4(1.0, 0.0, 0.0, 0.0));
@@ -38,20 +41,23 @@ int main(void)
 		Tangerine::Start_Draw();
 
 
-		Tangerine::Set_TransformData(glm::vec2(-100.f, 0.f), glm::vec2(100.f, 100.f), rotation);
+		Tangerine::Set_TransformData(Tangerine::Get_WindowSize()/2.f, glm::vec2(100.f, 100.f), rotation);
 		Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultShader"));
 		Tangerine::Set_TintColor(glm::vec4(0.3, 0.7, 0.1, 0.5));
 		Tangerine::Set_TextureOffset(glm::vec2(0.0f, 0.0f));
+		Tangerine::Set_ScreenSpaceDraw(true);
 		Tangerine::Draw(Tangerine::Get_Mesh("TriangleMesh"));
-		//pos += 0.02f;
+		Tangerine::Set_ScreenSpaceDraw(false);
+		pos -= 1.f;
 
-		Tangerine::Set_TransformData(glm::vec2(100.0f,0.0f), glm::vec2(200.f,200.f), 0.f);
+		Tangerine::Set_TransformData(glm::vec2(500.0f,0.0f), glm::vec2(200.f, 200.f), 0.f);
 		Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultTexShader"));
 		Tangerine::Set_CurrTexture(Tangerine::Get_Texture("ManTexture"));
 		Tangerine::Set_TintColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
-		Tangerine::Set_TextureOffset(glm::vec2(0.0f, 0.0f));
+		Tangerine::Set_TextureOffset(glm::vec2(offset, 0.0f));
 		Tangerine::Draw(Tangerine::Get_Mesh("RectMesh"));
 		++rotation;
+		offset += 0.01f;
 		glm::vec2 vec = glm::vec2(pos, 0.f);
 		//Tangerine::Set_CameraZoom(fabs(sinf(zoom)) + 0.1f);
 		//zoom += 0.01f;

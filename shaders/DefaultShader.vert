@@ -13,6 +13,8 @@ uniform mat4 view;
 uniform vec4 tintColor;
 uniform vec2 textOffset;
 
+//CUSTOM UNIFORMS
+
 void main()
 {
      gl_Position =  viewprojection * transform * vec4(inPos,0.0, 1.0);

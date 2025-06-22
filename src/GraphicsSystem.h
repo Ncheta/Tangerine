@@ -63,6 +63,8 @@ public:
 	void SetCurrTexture(Texture* texture);
 	void SetTransformMatrix(const glm::mat4& transform);
 	void SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation);
+	glm::vec2 ScreentoWorld(const glm::vec2& pos);
+	void InScreenSpace(bool InScreen);
 	void SetTintColor(const glm::vec4& color);
 	void SetTextureOffset(const glm::vec2& offset);
 	Shader* GetCurrShader();
@@ -93,6 +95,7 @@ private:
 	glm::vec4 mTintColor{ 0.0f };
 	glm::vec2 mTextureOffset{ 0.0f };
 	bool isDrawingEnabled{ false };
+	bool isInScreenSpace{ false };
 	
 
 };

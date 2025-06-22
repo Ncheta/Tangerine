@@ -96,6 +96,7 @@ void GraphicsSystem::SetTransformMatrix(const glm::mat4& transform)
 
 void GraphicsSystem::SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation)
 {
+	
 	glm::mat4 scaleMatrix = glm::scale(glm::vec3(scale, 1.0));
 	glm::mat4 rotationMatrix = glm::rotate(glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0));
 	glm::mat4 translationMatrix = glm::translate(glm::vec3(pos, 0.0));
@@ -103,6 +104,17 @@ void GraphicsSystem::SetTransformMatrix(const glm::vec2& pos, const glm::vec2& s
 	glm::mat4 transformationMatrix = translationMatrix * rotationMatrix * scaleMatrix;
 
 	mTransformMatrix = transformationMatrix;
+}
+
+glm::vec2 GraphicsSystem::ScreentoWorld(const glm::vec2& pos)
+{
+	glm::vec2 worldpos = glm::vec2(pos.x - (Camera.GetWindowSize().x / 2), (Camera.GetWindowSize().y / 2) - pos.y);
+	return worldpos;
+}
+
+void GraphicsSystem::InScreenSpace(bool inScreen)
+{
+	isInScreenSpace = inScreen;
 }
 
 void GraphicsSystem::SetTintColor(const glm::vec4& color)
@@ -145,7 +157,9 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 	{
 		mcurrShader->Use();
 		glm::mat4 identity = glm::mat4(1.0f);
-		glm::mat4 viewproj = Camera.GetViewProjMatrix();
+		glm::mat4 viewproj;
+		if (isInScreenSpace) viewproj = Camera.GetScreenViewProjMatrix();
+		else viewproj = Camera.GetWorldViewProjMatrix();
 		mcurrShader->SetMat4("viewprojection", viewproj);
 		mcurrShader->SetMat4("transform", mTransformMatrix);
 		mcurrShader->SetVec4("tintColor", mTintColor); //@@TODO; move to the material class in future
