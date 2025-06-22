@@ -70,19 +70,34 @@ namespace Tangerine
 		Graphics.SetBGColor(color);
 	}
 
-	void Set_TextureOffset(const glm::vec2& offset)
+	void Set_CurrMatTextureOffset(const glm::vec2& offset)
 	{
-		Graphics.SetTextureOffset(offset);
+		Graphics.SetCurrMatTextureOffset(offset);
 	}
 
-	void Set_TintColor(const glm::vec4& color)
+	void Set_MaterialTextureOffset(Material* material, const glm::vec2& offset)
 	{
-		Graphics.SetTintColor(color);
+		material->SetMaterialTextureOffset(offset);
+	}
+
+	void Set_CurrMatTintColor(const glm::vec4& color)
+	{
+		Graphics.SetCurrMatTintColor(color);
+	}
+
+	void Set_MaterialTintColor(Material* material, const glm::vec4& color)
+	{
+		material->SetMaterialTint(color);
 	}
 
 	void Set_TransformMatrix(const glm::mat4& transformMatrix)
 	{
 		Graphics.SetTransformMatrix(transformMatrix);
+	}
+
+	void Set_MaterialTexture(Material* material, Texture* texture)
+	{
+		material->SetMaterialTexture(texture);
 	}
 
 	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle)
@@ -197,9 +212,9 @@ namespace Tangerine
 		Graphics.SetGlobalShaderMode(mode);
 	}
 
-	void Set_CurrTexture(Texture* texture)
+	void Set_CurrMaterial(Material* material)
 	{
-		Graphics.SetCurrTexture(texture);
+		Graphics.SetCurrMaterial(material);
 	}
 
 	bool ShouldClose()

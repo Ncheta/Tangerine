@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	FancyShader.h
+// File Name:	Material.h
 // Author(s):	Ncheta Mbaraonye 
 // 
 //------------------------------------------------------------------------------
@@ -10,7 +10,10 @@
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
-#include "CustomShader.h"
+// Using glm for math
+#include "glm/glm.hpp"
+#include <glm/gtx/transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 //------------------------------------------------------------------------------
 
 
@@ -19,7 +22,8 @@
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
-
+class Texture;
+class Shader;
 //------------------------------------------------------------------------------
 // Public Constants:
 //------------------------------------------------------------------------------
@@ -39,16 +43,28 @@
 // Class:
 //------------------------------------------------------------------------------
 
-class FancyShader : public CustomShader
+class Material
 {
 public:
 	//Public Functions:
-	void SetCustomUniforms() override;
+	Material();
+	Material(Texture* texture,Shader* shader = nullptr);
+	void SetMaterialShader(Shader* shader);
+	void SetMaterialTexture(Texture* texture);
+	void SetMaterialTint(const glm::vec4& tintColor);
+	void SetMaterialTextureOffset(const glm::vec2& textureOffset);
+	Shader* GetShader() const;
+	Texture* GetTexture() const;
+	const glm::vec4& GetTintColor();
+	const glm::vec2& GetTextureOffset();
 	//Public Variables:
 private:
 	//Private Functions:
-	
 	//Private Variables:
+	Shader* mShader{ nullptr };
+	Texture* mTexture{ nullptr };
+	glm::vec4 mTintColor{ 0.0f };
+	glm::vec2 mTextureOffset{ 0.0f };
 };
 
 

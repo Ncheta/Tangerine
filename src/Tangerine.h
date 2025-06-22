@@ -27,6 +27,7 @@ class Mesh;
 class Shader;
 class Texture;
 class CustomShader;
+class Material;
 //------------------------------------------------------------------------------
 // Public Constants:
 //------------------------------------------------------------------------------
@@ -79,9 +80,10 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Start_Draw();
 	void End_Draw();
 	void Set_BGColor(const glm::vec4& color);
-	void Set_TextureOffset(const glm::vec2& offset);
-	void Set_TintColor(const glm::vec4& color);
+	void Set_CurrMatTextureOffset(const glm::vec2& offset);
+	void Set_CurrMatTintColor(const glm::vec4& color);
 	void Set_TransformMatrix(const glm::mat4& transformMatrix);
+	void Set_MaterialTexture(Material* material, Texture* texture);
 	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle);
 	void Set_CameraPos(const glm::vec2& pos);
 	void Set_CameraZoom(float zoom);
@@ -104,7 +106,7 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	glm::vec2 ScreenToWorld(const glm::vec2& pos);
 
 	void Set_CustomShader(Shader* shader);
-	void Set_CurrTexture(Texture* texture);
+	void Set_CurrMaterial(Material* material);
 	bool ShouldClose();
 }
 

@@ -1,69 +1,89 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	ShaderManager.h
+// File Name:	Material.cpp
 // Author(s):	Ncheta Mbaraonye 
-// 
-//------------------------------------------------------------------------------
-
-#pragma once
-
-//------------------------------------------------------------------------------
-// Include Files:
-//------------------------------------------------------------------------------
-#include <unordered_map>
-#include <string>
-#include "Shader.h"
-
-
+//
 //------------------------------------------------------------------------------
 
 
-
-
-//------------------------------------------------------------------------------
-// Forward References:
-//------------------------------------------------------------------------------
+#include "Material.h"
+#include "Texture.h"
+#include "shader.h"
 
 //------------------------------------------------------------------------------
-// Public Constants:
+// Private Constants:
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
-// Public Typedefs:
+// Private Structures:
 //------------------------------------------------------------------------------
 
-
+//------------------------------------------------------------------------------
+// Private Variables:
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // Public Variables:
 //------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------
+// Private Function Declarations:
+//------------------------------------------------------------------------------
+
 
 //------------------------------------------------------------------------------
-// Class:
+// Public Functions:
 //------------------------------------------------------------------------------
 
-class ShaderManager
+//------------------------------------------------------------------------------
+// Private Functions:
+//------------------------------------------------------------------------------
+
+Material::Material()
 {
-public:
-	//Public Functions:
-	Shader* CreateShader(const std::string& ShaderName, const char* vertPath, const char* fragPath);
-	Shader* CreateCustomShader(const std::string& ShaderName, const char* vertPath, const char* fragPath);
-	Shader* GetShader(const std::string& ShaderName);
-	void ReleaseShader(const std::string& ShaderName);
-	int Init();
+}
 
-	void ReleaseAll();
+Material::Material(Texture* texture,Shader* shader) :mShader(shader), mTexture(texture)
+{
 
-	//Public Variables:
-private:
-	//Private Functions:
+}
 
-	//Private Variables:
-	std::unordered_map<std::string, Shader*> ShaderList;
-};
+void Material::SetMaterialShader(Shader* shader)
+{
+	mShader = shader;
+}
 
+void Material::SetMaterialTexture(Texture* texture)
+{
+	mTexture = texture;
+}
 
+void Material::SetMaterialTint(const glm::vec4& tintColor)
+{
+	mTintColor = tintColor;
+}
 
+void Material::SetMaterialTextureOffset(const glm::vec2& textureOffset)
+{
+	mTextureOffset = textureOffset;
+}
 
+Shader* Material::GetShader() const 
+{
+	return mShader;
+}
 
+Texture* Material::GetTexture() const
+{
+	return mTexture;
+}
+
+const glm::vec4& Material::GetTintColor()
+{
+	return mTintColor;
+}
+
+const glm::vec2& Material::GetTextureOffset()
+{
+	return mTextureOffset;
+}

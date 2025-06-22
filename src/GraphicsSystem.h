@@ -18,9 +18,9 @@
 #include "MeshManager.h"
 #include "ShaderManager.h"
 #include "TextureManager.h"
-#include "Texture.h"
 #include "Camera.h"
 #include "Tangerine.h"
+#include "Material.h"
 //------------------------------------------------------------------------------
 
 
@@ -63,15 +63,16 @@ public:
 	void SetBGColor(const glm::vec4& color);
 	void SetWindowSize(int width, int height);
 	void SetCustomShader(Shader* shader);
-	void SetCurrTexture(Texture* texture);
+	void SetCurrMaterial(Material* material);
 	void SetTransformMatrix(const glm::mat4& transform);
 	void SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation);
 	void SetGlobalShaderMode(GlobalShaderMode mode);
 	glm::vec2 ScreentoWorld(const glm::vec2& pos);
 	void InScreenSpace(bool InScreen);
-	void SetTintColor(const glm::vec4& color);
-	void SetTextureOffset(const glm::vec2& offset);
+	void SetCurrMatTintColor(const glm::vec4& color);
+	void SetCurrMatTextureOffset(const glm::vec2& offset);
 	Shader* GetCurrShader();
+	Material* GetCurrMaterial();
 	glm::vec2 GetWindowSize() const;
 	void StartDraw();
 	void EndDraw();
@@ -93,14 +94,13 @@ private:
 // Private Functions:
 	static void ResizeViewport(WindowHNDL window, int width, int height);
 	void SetCommonUniforms();
+	Shader* GetAppropriateShader();
 // Private Variables:
 
 	Shader* mcurrShader{nullptr};
 	Shader* mcustomShader{ nullptr };
-	Texture* mcurrTexture{ nullptr };
+	Material* mcurrMaterial{ nullptr };
 	glm::mat4 mTransformMatrix{ 1 };
-	glm::vec4 mTintColor{ 0.0f };
-	glm::vec2 mTextureOffset{ 0.0f };
 	bool isDrawingEnabled{ false };
 	bool isInScreenSpace{ false };
 	GlobalShaderMode mGlobalShadermode{ GlobalShaderMode::DEFAULT };

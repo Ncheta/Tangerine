@@ -20,7 +20,7 @@
 #include "Mesh.h"
 #include <string>
 #include "Camera.h"
-#include "CustomShader.h"
+
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -123,14 +123,14 @@ void GraphicsSystem::InScreenSpace(bool inScreen)
 	isInScreenSpace = inScreen;
 }
 
-void GraphicsSystem::SetTintColor(const glm::vec4& color)
+void GraphicsSystem::SetCurrMatTintColor(const glm::vec4& color)
 {
-	mTintColor = color;
+	mcurrMaterial->SetMaterialTint(color);
 }
 
-void GraphicsSystem::SetTextureOffset(const glm::vec2& offset)
+void GraphicsSystem::SetCurrMatTextureOffset(const glm::vec2& offset)
 {
-	mTextureOffset = offset;
+	mcurrMaterial->SetMaterialTextureOffset(offset);
 }
 
 void GraphicsSystem::SetWindowSize(int width, int height)
@@ -164,35 +164,40 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 {
 	if (!isDrawingEnabled) return;
 
-	if (mGlobalShadermode == GlobalShaderMode::DEFAULT)
+	
+	
+	mcurrShader = GetAppropriateShader();
+	if (mGlobalShadermode == GlobalShaderMode::CUSTOM)
 	{
-		if (mcurrTexture) mcurrShader = mShaderManager.GetShader("DefaultTexShader");
-		else mcurrShader = mShaderManager.GetShader("DefaultShader");
-	}
-	else if (mcustomShader)
-	{
-		mcurrShader = mcustomShader;
 		mcurrShader->SetCustomUniforms();
 	}
-
 	mcurrShader->Use();
 	SetCommonUniforms();
-	mcurrShader->SetVec4("tintColor", mTintColor); //@@TODO; move to the material class in future
-	mcurrShader->SetVec2("textOffset", mTextureOffset); //@@TODO: move to the material class in future
+
+	mcurrShader->SetVec4("tintColor", mcurrMaterial->GetTintColor()); //@@TODO; move to the material class in future
+	mcurrShader->SetVec2("textOffset", mcurrMaterial->GetTextureOffset()); //@@TODO: move to the material class in future
 	
-	
-	if (mcurrTexture)mcurrTexture->Use();
+	if (mcurrMaterial->GetTexture())
+	{
+		mcurrMaterial->GetTexture()->Use();
+	}
+
 	mesh->Draw();
 }
 
-void GraphicsSystem::SetCurrTexture(Texture* texture)
+void GraphicsSystem::SetCurrMaterial(Material* material)
 {
-	mcurrTexture = texture;
+	mcurrMaterial = material;
 }
 
 Shader* GraphicsSystem::GetCurrShader()
 {
 	return mcurrShader;
+}
+
+Material* GraphicsSystem::GetCurrMaterial()
+{
+	return mcurrMaterial;
 }
 
 void GraphicsSystem::ResizeViewport(WindowHNDL window, int width, int height)
@@ -212,6 +217,28 @@ void GraphicsSystem::SetCommonUniforms()
 	else viewproj = Camera.GetWorldViewProjMatrix();
 	mcurrShader->SetMat4("viewprojection", viewproj);
 	mcurrShader->SetMat4("transform", mTransformMatrix);
+}
+
+Shader* GraphicsSystem::GetAppropriateShader()
+{
+	Shader* whichShader = nullptr;
+
+	if (mGlobalShadermode == GlobalShaderMode::DEFAULT)
+	{
+		if (mcurrMaterial->GetTexture()) whichShader = mShaderManager.GetShader("DefaultTexShader");
+		else whichShader = mShaderManager.GetShader("DefaultShader");
+	}
+	else if (mcustomShader)
+	{
+		whichShader = mcustomShader;
+	}
+
+	if (mcurrMaterial->GetShader())
+	{
+		whichShader = mcurrMaterial->GetShader();
+	}
+
+	return whichShader;
 }
 
 
