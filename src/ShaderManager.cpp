@@ -55,6 +55,18 @@ Shader* ShaderManager::CreateShader(const std::string& ShaderName, const char* v
 	}
 	return nullptr;
 }
+
+Shader* ShaderManager::CreateCustomShader(const std::string& ShaderName, const char* vertPath, const char* fragPath)
+{
+	if (ShaderName == "DefaultShader")
+	{
+		return nullptr;
+	}
+	return CreateShader(ShaderName, vertPath, fragPath);
+}
+
+
+
 Shader* ShaderManager::GetShader(const std::string& ShaderName)
 {
 	auto iter = ShaderList.find(ShaderName);

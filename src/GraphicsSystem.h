@@ -20,6 +20,7 @@
 #include "TextureManager.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "Tangerine.h"
 //------------------------------------------------------------------------------
 
 
@@ -52,6 +53,8 @@
 class GraphicsSystem
 {
 public:
+
+
 //Public Functions:
 	GraphicsSystem( glfwInterface& glfw); //Initialize with WindowInterface rn it's glfw
 	int Init();
@@ -59,10 +62,11 @@ public:
 	int Exit();
 	void SetBGColor(const glm::vec4& color);
 	void SetWindowSize(int width, int height);
-	void SetCurrShader(Shader* shader);
+	void SetCustomShader(Shader* shader);
 	void SetCurrTexture(Texture* texture);
 	void SetTransformMatrix(const glm::mat4& transform);
 	void SetTransformMatrix(const glm::vec2& pos, const glm::vec2& scale, float rotation);
+	void SetGlobalShaderMode(GlobalShaderMode mode);
 	glm::vec2 ScreentoWorld(const glm::vec2& pos);
 	void InScreenSpace(bool InScreen);
 	void SetTintColor(const glm::vec4& color);
@@ -72,6 +76,8 @@ public:
 	void StartDraw();
 	void EndDraw();
 	void Draw(const Mesh* mesh);
+
+
 
 	
 	
@@ -86,16 +92,18 @@ public:
 private:
 // Private Functions:
 	static void ResizeViewport(WindowHNDL window, int width, int height);
-
+	void SetCommonUniforms();
 // Private Variables:
 
 	Shader* mcurrShader{nullptr};
+	Shader* mcustomShader{ nullptr };
 	Texture* mcurrTexture{ nullptr };
 	glm::mat4 mTransformMatrix{ 1 };
 	glm::vec4 mTintColor{ 0.0f };
 	glm::vec2 mTextureOffset{ 0.0f };
 	bool isDrawingEnabled{ false };
 	bool isInScreenSpace{ false };
+	GlobalShaderMode mGlobalShadermode{ GlobalShaderMode::DEFAULT };
 	
 
 };

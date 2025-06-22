@@ -26,6 +26,7 @@
 class Mesh;
 class Shader;
 class Texture;
+class CustomShader;
 //------------------------------------------------------------------------------
 // Public Constants:
 //------------------------------------------------------------------------------
@@ -58,6 +59,12 @@ typedef struct Vertex
 
 
 }Vertex;
+
+enum class GlobalShaderMode
+{
+	DEFAULT,
+	CUSTOM
+};
 //------------------------------------------------------------------------------
 // Public Functions
 //------------------------------------------------------------------------------
@@ -81,6 +88,7 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Set_WindowSize(const glm::vec2& windowSize);
 	void Set_WindowSize(int width, int height);
 	void Set_ScreenSpaceDraw(bool draw);
+	void Set_GlobalShaderMode(GlobalShaderMode mode);
 	void Rotate_Camera(float angle);
 	Mesh* Create_Mesh(const std::string& name, Vertex vertices[], size_t arraySize);
 	Texture* Create_Texture(const std::string& name,const char* filePath);
@@ -95,7 +103,7 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	glm::vec2 Get_WindowSize();
 	glm::vec2 ScreenToWorld(const glm::vec2& pos);
 
-	void Set_CurrShader(Shader* shader);
+	void Set_CustomShader(Shader* shader);
 	void Set_CurrTexture(Texture* texture);
 	bool ShouldClose();
 }

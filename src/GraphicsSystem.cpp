@@ -20,6 +20,7 @@
 #include "Mesh.h"
 #include <string>
 #include "Camera.h"
+#include "CustomShader.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -106,6 +107,11 @@ void GraphicsSystem::SetTransformMatrix(const glm::vec2& pos, const glm::vec2& s
 	mTransformMatrix = transformationMatrix;
 }
 
+void GraphicsSystem::SetGlobalShaderMode(GlobalShaderMode mode)
+{
+	mGlobalShadermode = mode;
+}
+
 glm::vec2 GraphicsSystem::ScreentoWorld(const glm::vec2& pos)
 {
 	glm::vec2 worldpos = glm::vec2(pos.x - (Camera.GetWindowSize().x / 2), (Camera.GetWindowSize().y / 2) - pos.y);
@@ -133,6 +139,11 @@ void GraphicsSystem::SetWindowSize(int width, int height)
 	ResizeViewport(mglfw.GetWindowHandle(), width, height);
 }
 
+void GraphicsSystem::SetCustomShader(Shader* shader)
+{
+	mcustomShader = shader;
+}
+
 glm::vec2 GraphicsSystem::GetWindowSize() const
 {
 	return mglfw.GetWindowSize();
@@ -153,29 +164,25 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 {
 	if (!isDrawingEnabled) return;
 
-	if (mcurrShader) 
+	if (mGlobalShadermode == GlobalShaderMode::DEFAULT)
 	{
-		mcurrShader->Use();
-		glm::mat4 identity = glm::mat4(1.0f);
-		glm::mat4 viewproj;
-		if (isInScreenSpace) viewproj = Camera.GetScreenViewProjMatrix();
-		else viewproj = Camera.GetWorldViewProjMatrix();
-		mcurrShader->SetMat4("viewprojection", viewproj);
-		mcurrShader->SetMat4("transform", mTransformMatrix);
-		mcurrShader->SetVec4("tintColor", mTintColor); //@@TODO; move to the material class in future
-		mcurrShader->SetVec2("textOffset", mTextureOffset); //@@TODO: move to the material class in future
+		if (mcurrTexture) mcurrShader = mShaderManager.GetShader("DefaultTexShader");
+		else mcurrShader = mShaderManager.GetShader("DefaultShader");
 	}
-	else {}; //error stuff
+	else if (mcustomShader)
+	{
+		mcurrShader = mcustomShader;
+		mcurrShader->SetCustomUniforms();
+	}
 
-
-
+	mcurrShader->Use();
+	SetCommonUniforms();
+	mcurrShader->SetVec4("tintColor", mTintColor); //@@TODO; move to the material class in future
+	mcurrShader->SetVec2("textOffset", mTextureOffset); //@@TODO: move to the material class in future
+	
+	
 	if (mcurrTexture)mcurrTexture->Use();
 	mesh->Draw();
-}
-
-void GraphicsSystem::SetCurrShader(Shader* shader)
-{
-	mcurrShader = shader;
 }
 
 void GraphicsSystem::SetCurrTexture(Texture* texture)
@@ -194,6 +201,17 @@ void GraphicsSystem::ResizeViewport(WindowHNDL window, int width, int height)
 
 	glViewport(0, 0, width, height);
 	gGraphics->Camera.SetWindowSize(width, height);
+}
+
+void GraphicsSystem::SetCommonUniforms()
+{
+	glm::mat4 identity = glm::mat4(1.0f);
+	glm::mat4 viewproj;
+
+	if (isInScreenSpace) viewproj = Camera.GetScreenViewProjMatrix();
+	else viewproj = Camera.GetWorldViewProjMatrix();
+	mcurrShader->SetMat4("viewprojection", viewproj);
+	mcurrShader->SetMat4("transform", mTransformMatrix);
 }
 
 

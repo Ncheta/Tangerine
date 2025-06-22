@@ -134,7 +134,7 @@ namespace Tangerine
 
 	Shader* Create_Shader(const std::string& name,const char* vertPath, const char* fragPath)
 	{
-		return Graphics.mShaderManager.CreateShader(name, vertPath, fragPath);
+		return Graphics.mShaderManager.CreateCustomShader(name, vertPath, fragPath);
 	}
 
 	void Release_Shader(const std::string& name)
@@ -187,9 +187,14 @@ namespace Tangerine
 		return Graphics.mTextureManager.CreateTexture(name, filePath);
 	}
 
-	void Set_CurrShader(Shader* shader)
+	void Set_CustomShader(Shader* shader)
 	{
-		Graphics.SetCurrShader(shader);
+		Graphics.SetCustomShader(shader);
+	}
+
+	void Set_GlobalShaderMode(GlobalShaderMode mode)
+	{
+		Graphics.SetGlobalShaderMode(mode);
 	}
 
 	void Set_CurrTexture(Texture* texture)

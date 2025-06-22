@@ -55,6 +55,7 @@ public:
 	Shader(const char* vertexPath, const char* fragPath);
 	~Shader();
 	void Use() const; //use/activate shader
+	virtual void SetCustomUniforms();
 
 	//utils for Uniforms
 	void SetBool(const std::string& name, bool value) const;

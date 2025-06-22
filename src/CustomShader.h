@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	ShaderManager.h
+// File Name:	CustomShader.h
 // Author(s):	Ncheta Mbaraonye 
 // 
 //------------------------------------------------------------------------------
@@ -10,11 +10,7 @@
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
-#include <unordered_map>
-#include <string>
-#include "Shader.h"
-#include "CustomShader.h"
-
+#include "shader.h"
 //------------------------------------------------------------------------------
 
 
@@ -43,26 +39,17 @@
 // Class:
 //------------------------------------------------------------------------------
 
-class ShaderManager
+class CustomShader : public Shader
 {
 public:
 	//Public Functions:
-	Shader* CreateShader(const std::string& ShaderName, const char* vertPath, const char* fragPath);
-	Shader* CreateCustomShader(const std::string& ShaderName, const char* vertPath, const char* fragPath);
-	Shader* GetShader(const std::string& ShaderName);
-	void ReleaseShader(const std::string& ShaderName);
-	int Init();
-
-	void ReleaseAll();
-
+	virtual void SetCustomUniforms() = 0;
 	//Public Variables:
 private:
 	//Private Functions:
-
+	
 	//Private Variables:
-	std::unordered_map<std::string, Shader*> ShaderList;
 };
-
 
 
 

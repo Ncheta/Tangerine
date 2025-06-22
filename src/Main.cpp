@@ -18,6 +18,7 @@
 
 
 #include "Tangerine.h"
+#include "FancyShader.h"
 
 
 
@@ -26,7 +27,7 @@ int main(void)
 
 	Tangerine::Engine_Init();
 	Texture* testTexture = Tangerine::Create_Texture("ManTexture","assets/man.png");
-	Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultShader"));
+	Shader* testShader = Tangerine::Create_Shader("test", "shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
 	
 	
 	float pos = 1.f;
@@ -42,20 +43,22 @@ int main(void)
 
 
 		Tangerine::Set_TransformData(Tangerine::Get_WindowSize()/2.f, glm::vec2(100.f, 100.f), rotation);
-		Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultShader"));
 		Tangerine::Set_TintColor(glm::vec4(0.3, 0.7, 0.1, 0.5));
 		Tangerine::Set_TextureOffset(glm::vec2(0.0f, 0.0f));
+		Tangerine::Set_CurrTexture(nullptr);
 		Tangerine::Set_ScreenSpaceDraw(true);
 		Tangerine::Draw(Tangerine::Get_Mesh("TriangleMesh"));
 		Tangerine::Set_ScreenSpaceDraw(false);
 		pos -= 1.f;
 
 		Tangerine::Set_TransformData(glm::vec2(500.0f,0.0f), glm::vec2(200.f, 200.f), 0.f);
-		Tangerine::Set_CurrShader(Tangerine::Get_Shader("DefaultTexShader"));
 		Tangerine::Set_CurrTexture(Tangerine::Get_Texture("ManTexture"));
+		Tangerine::Set_GlobalShaderMode(GlobalShaderMode::CUSTOM);
+		Tangerine::Set_CustomShader(Tangerine::Get_Shader("test"));
 		Tangerine::Set_TintColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 		Tangerine::Set_TextureOffset(glm::vec2(offset, 0.0f));
 		Tangerine::Draw(Tangerine::Get_Mesh("RectMesh"));
+
 		++rotation;
 		offset += 0.01f;
 		glm::vec2 vec = glm::vec2(pos, 0.f);
