@@ -4,7 +4,8 @@ layout (location = 1) in vec2 inTexCoord;
 layout (location = 2) in vec4 inColor;
 
 out vec4 Color;
-out vec2 TexCoord;
+out vec2 TexCoord; 
+
 
 uniform mat4 viewprojection;
 uniform mat4 transform;

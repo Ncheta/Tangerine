@@ -126,6 +126,11 @@ void glfwInterface::SetWindowSize(int width, int height)
 	glfwSetWindowSize(mwindow, width, height);
 }
 
+float glfwInterface::GetTime()
+{
+	return static_cast<float>(glfwGetTime());
+}
+
 glm::vec2 glfwInterface::GetWindowSize()
 {
 	int width = 0;

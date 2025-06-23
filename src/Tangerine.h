@@ -127,6 +127,7 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Set_CustomShader(Shader* shader);
 	void Set_CurrMaterial(Material* material);
 	bool ShouldClose();
+	float GetTime();
 }
 
 

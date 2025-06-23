@@ -261,6 +261,11 @@ namespace Tangerine
 	{
 		return Graphics.mglfw.ShouldClose();
 	}
+
+	float GetTime()
+	{
+		return Graphics.mglfw.GetTime();
+	}
 }
 //------------------------------------------------------------------------------
 // Private Functions:

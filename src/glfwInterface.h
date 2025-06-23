@@ -53,6 +53,7 @@ public:
 	void Update();
 	void Exit();
 	void SetWindowSize(int width, int height);
+	float GetTime();
 	glm::vec2 GetWindowSize();
 	WindowHNDL GetWindowHandle();
 	~glfwInterface();
