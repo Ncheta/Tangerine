@@ -13,13 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{375dfb9e-989c-43df-8566-43a90b5f4d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader">
+      <UniqueIdentifier>{def7ba1a-0fd9-4689-892e-7116115a3b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Texture">
+      <UniqueIdentifier>{1e279f09-13e0-45d7-bb7f-95f3a15d2139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Camera">
+      <UniqueIdentifier>{61d3ff5b-52b2-4c32-983f-92d13dd0d688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Material">
+      <UniqueIdentifier>{0b893dc2-eb4a-4fd3-a9ed-e8440bec6048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Mesh">
+      <UniqueIdentifier>{39433faa-c260-4aa6-b90d-1e6c0ad44ae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderFiles">
       <UniqueIdentifier>{b612ab99-d11c-4dfe-bd31-e9629a29cdc9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Vertex">
+    <Filter Include="ShaderFiles\Vertex">
       <UniqueIdentifier>{487b66a0-dfbe-40d9-a811-b37a03c8176c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Fragment">
+    <Filter Include="ShaderFiles\Fragment">
       <UniqueIdentifier>{6b0d2fd2-e7c6-447d-88a3-625dfc010a6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -36,35 +54,38 @@
     <ClCompile Include="src\stub.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicsSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Tangerine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Material.cpp">
+      <Filter>Graphics\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MaterialManager.cpp">
+      <Filter>Graphics\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>Graphics\Mesh</Filter>
+    </ClCompile>
     <ClCompile Include="src\MeshManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ShaderManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Texture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\TextureManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Graphics\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="src\CustomShader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Graphics\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderManager.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicsSystem.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shader.cpp">
+      <Filter>Graphics\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,49 +95,52 @@
     <ClInclude Include="src\glfwInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\stub.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GraphicsSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Tangerine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MeshManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Graphics\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="src\ShaderManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Material.h">
+      <Filter>Graphics\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MaterialManager.h">
+      <Filter>Graphics\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshManager.h">
+      <Filter>Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\Texture.h">
-      <Filter>Header Files</Filter>
+      <Filter>Graphics\Texture</Filter>
     </ClInclude>
     <ClInclude Include="src\TextureManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Graphics\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="src\CustomShader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\ShaderManager.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stub.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GraphicsSystem.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\DefaultShader.frag">
-      <Filter>Shaders\Fragment</Filter>
+      <Filter>ShaderFiles\Fragment</Filter>
     </None>
     <None Include="shaders\DefaultShader.vert">
-      <Filter>Shaders\Vertex</Filter>
+      <Filter>ShaderFiles\Vertex</Filter>
     </None>
     <None Include="shaders\DefaultShaderAltTex.frag">
-      <Filter>Shaders\Fragment</Filter>
+      <Filter>ShaderFiles\Fragment</Filter>
     </None>
   </ItemGroup>
 </Project>
