@@ -122,14 +122,14 @@
     <ClInclude Include="src\ShaderManager.h">
       <Filter>Graphics\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\stub.h">
-      <Filter>Graphics\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="src\GraphicsSystem.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\shader.h">
       <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stub.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

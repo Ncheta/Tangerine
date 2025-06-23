@@ -9,6 +9,7 @@
 #include "Material.h"
 #include "Texture.h"
 #include "shader.h"
+#include <algorithm>
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -68,6 +69,11 @@ void Material::SetMaterialTextureOffset(const glm::vec2& textureOffset)
 	mTextureOffset = textureOffset;
 }
 
+void Material::SetMaterialTransparency(float transparency)
+{
+	mTransparency = std::min(1.f,std::max(0.0f, transparency));
+}
+
 Shader* Material::GetShader() const 
 {
 	return mShader;
@@ -86,4 +92,9 @@ const glm::vec4& Material::GetTintColor()
 const glm::vec2& Material::GetTextureOffset()
 {
 	return mTextureOffset;
+}
+
+float Material::GetTransparency()
+{
+	return mTransparency;
 }

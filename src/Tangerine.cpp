@@ -95,9 +95,19 @@ namespace Tangerine
 		Graphics.SetCurrMatTintColor(color);
 	}
 
+	void Set_CurrMatTransparency(float value)
+	{
+		Graphics.SetCurrMatTransparency(value);
+	}
+
 	void Set_MaterialTintColor(Material* material, const glm::vec4& color)
 	{
 		material->SetMaterialTint(color);
+	}
+
+	void Set_MaterialTransparency(Material* material, float value)
+	{
+		material->SetMaterialTransparency(value);
 	}
 
 	void Set_TransformMatrix(const glm::mat4& transformMatrix)

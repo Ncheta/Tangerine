@@ -60,7 +60,7 @@ public:
 
 private:
 // Private Functions:
-	void SetCallBacks();
+
 
 // Private Variables:
 	WindowHNDL mwindow{nullptr};

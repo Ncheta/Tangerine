@@ -15,6 +15,7 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <string>
+#include "GraphicsSystem.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -72,6 +73,8 @@ int glfwInterface::Initalize(std::string windowName, int width, int height)
 		glfwTerminate();
 		return -1;
 	}
+
+
 
 	return 1;
 }
@@ -142,10 +145,7 @@ glfwInterface::~glfwInterface()
 	Exit();
 }
 
-void glfwInterface::SetCallBacks()
-{
-	
-}
+
 
 
 

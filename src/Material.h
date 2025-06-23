@@ -53,10 +53,12 @@ public:
 	void SetMaterialTexture(Texture* texture);
 	void SetMaterialTint(const glm::vec4& tintColor);
 	void SetMaterialTextureOffset(const glm::vec2& textureOffset);
+	void SetMaterialTransparency(float transparency);
 	Shader* GetShader() const;
 	Texture* GetTexture() const;
 	const glm::vec4& GetTintColor();
 	const glm::vec2& GetTextureOffset();
+	float GetTransparency();
 	//Public Variables:
 private:
 	//Private Functions:
@@ -65,6 +67,7 @@ private:
 	Texture* mTexture{ nullptr };
 	glm::vec4 mTintColor{ 0.0f };
 	glm::vec2 mTextureOffset{ 0.0f };
+	float mTransparency{ 1.f };
 };
 
 

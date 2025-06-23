@@ -62,8 +62,9 @@ int GraphicsSystem::Init()
 	}
 	
 	Camera.Init(mglfw);
-	glfwSetFramebufferSizeCallback(mglfw.GetWindowHandle(), ResizeViewport);
 	ResizeViewport(mglfw.GetWindowHandle(), 1080, 720);
+	SetGraphicsCallbacks();
+
 	glm::mat4 transform = glm::scale(glm::vec3(50.f, 50.f, 1.f));
 	mTransformMatrix = transform;
 	mMeshManager.Init();
@@ -73,6 +74,12 @@ int GraphicsSystem::Init()
 
 	mcurrMaterial = mMaterialManager.GetMaterial("SmoothPlastic");
 	mcurrShader = mShaderManager.GetShader("DefaultShader");
+
+	glDisable(GL_CULL_FACE);
+
+	// Enable blending for normal transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	return 0;
 }
 
@@ -158,6 +165,11 @@ void GraphicsSystem::SetCurrMatShader(Shader* shader)
 	mcurrMaterial->SetMaterialShader(shader);
 }
 
+void GraphicsSystem::SetCurrMatTransparency(float transparency)
+{
+	mcurrMaterial->SetMaterialTransparency(transparency);
+}
+
 void GraphicsSystem::SetWindowSize(int width, int height)
 {
 	mglfw.SetWindowSize(width, height);
@@ -203,9 +215,14 @@ void GraphicsSystem::Draw(const Mesh* mesh) //@@TODO: add texture sampling setti
 
 	mcurrShader->SetVec4("tintColor", mcurrMaterial->GetTintColor()); //@@TODO: when there's a number of material uniforms just make a 
 	mcurrShader->SetVec2("textOffset", mcurrMaterial->GetTextureOffset()); //set material uniforms function
-	
+	mcurrShader->SetFloat("alpha", mcurrMaterial->GetTransparency());
 	
 	mesh->Draw();
+}
+
+void GraphicsSystem::SetGraphicsCallbacks()
+{
+	glfwSetFramebufferSizeCallback(mglfw.GetWindowHandle(), ResizeViewport);
 }
 
 void GraphicsSystem::SetCurrMaterial(Material* material)

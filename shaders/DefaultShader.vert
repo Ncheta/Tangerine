@@ -12,12 +12,14 @@ uniform mat4 projection;
 uniform mat4 view;
 uniform vec4 tintColor;
 uniform vec2 textOffset;
+uniform float alpha;
 
 //CUSTOM UNIFORMS
 
 void main()
 {
      gl_Position =  viewprojection * transform * vec4(inPos,0.0, 1.0);
-     Color = inColor + (tintColor * tintColor.w);
+     Color.rgb = inColor.rgb + (tintColor.rgb * tintColor.w);
+     Color.a = alpha;
      TexCoord = inTexCoord + textOffset;
 }

@@ -85,7 +85,11 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Set_CurrMatShader(Shader* shader);
 
 	void Set_CurrMatTintColor(const glm::vec4& color);
+
+	void Set_CurrMatTransparency(float value);
 	
+	void Set_MaterialTransparency(Material* material, float value);
+
 	void Set_TransformMatrix(const glm::mat4& transformMatrix);
 
 	void Set_MaterialTextureOffset(Material* material, const glm::vec2& offset);

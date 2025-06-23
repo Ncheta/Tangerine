@@ -73,12 +73,14 @@ public:
 	void SetCurrMatTintColor(const glm::vec4& color);
 	void SetCurrMatTextureOffset(const glm::vec2& offset);
 	void SetCurrMatShader(Shader* shader);
+	void SetCurrMatTransparency(float transparency);
 	Shader* GetCurrShader();
 	Material* GetCurrMaterial();
 	glm::vec2 GetWindowSize() const;
 	void StartDraw();
 	void EndDraw();
 	void Draw(const Mesh* mesh);
+	
 
 
 
@@ -95,6 +97,7 @@ public:
 	 
 private:
 // Private Functions:
+	void SetGraphicsCallbacks();
 	static void ResizeViewport(WindowHNDL window, int width, int height);
 	void SetCommonUniforms();
 	Shader* GetAppropriateShader();
@@ -108,6 +111,7 @@ private:
 	bool isInScreenSpace{ false };
 	GlobalShaderMode mGlobalShadermode{ GlobalShaderMode::DEFAULT };
 	
+
 
 };
 

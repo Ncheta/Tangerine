@@ -46,6 +46,7 @@ int main(void)
 
 		Tangerine::Set_TransformData(Tangerine::Get_WindowSize()/2.f, glm::vec2(100.f, 100.f), rotation);
 		Tangerine::Set_CurrMaterial(Tangerine::Get_Material("SmoothPlastic"));
+		Tangerine::Set_MaterialTransparency(Tangerine::Get_Material("SmoothPlastic"), 0.5f);
 		Tangerine::Set_CurrMatTextureOffset(glm::vec2(0.0f, 0.0f));
 		
 		Tangerine::Set_ScreenSpaceDraw(true);
