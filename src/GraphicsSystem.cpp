@@ -86,6 +86,7 @@ int GraphicsSystem::Exit()
 	mMeshManager.ReleaseAll();
 	mTextureManager.ReleaseAll();
 	mShaderManager.ReleaseAll();
+	mMaterialManager.ReleaseAll();
 	return 0;
 }
 
@@ -184,7 +185,7 @@ void GraphicsSystem::EndDraw()
 	isDrawingEnabled = false;
 }
 
-void GraphicsSystem::Draw(const Mesh* mesh)
+void GraphicsSystem::Draw(const Mesh* mesh) //@@TODO: add texture sampling settings and stuff 
 {
 	if (!isDrawingEnabled) return;
 
@@ -195,13 +196,15 @@ void GraphicsSystem::Draw(const Mesh* mesh)
 	{
 		mcurrShader->SetCustomUniforms();
 	}
+
 	mcurrShader->Use();
+	if (mcurrMaterial && mcurrMaterial->GetTexture()) mcurrMaterial->GetTexture()->Use();
 	SetCommonUniforms();
 
 	mcurrShader->SetVec4("tintColor", mcurrMaterial->GetTintColor()); //@@TODO: when there's a number of material uniforms just make a 
 	mcurrShader->SetVec2("textOffset", mcurrMaterial->GetTextureOffset()); //set material uniforms function
 	
-	if (mcurrMaterial && mcurrMaterial->GetTexture()) mcurrMaterial->GetTexture()->Use();
+	
 	mesh->Draw();
 }
 

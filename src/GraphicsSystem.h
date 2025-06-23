@@ -51,7 +51,7 @@
 // Class:
 //------------------------------------------------------------------------------
 
-class GraphicsSystem //@@TODO: error handling for all pointer usages
+class GraphicsSystem //@@TODO: error handling for all pointer usages and texture sampling modes (enum in Tangerine, member here)
 {
 public:
 

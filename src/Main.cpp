@@ -58,7 +58,7 @@ int main(void)
 		Tangerine::Set_GlobalShaderMode(GlobalShaderMode::DEFAULT);
 		Tangerine::Set_CustomShader(Tangerine::Get_Shader("test"));
 		//Tangerine::Set_CurrMatTintColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
-		//Tangerine::Set_CurrMatTextureOffset(glm::vec2(offset, 0.0f));
+		Tangerine::Set_CurrMatTextureOffset(glm::vec2(offset, 0.0f));
 		Tangerine::Draw(Tangerine::Get_Mesh("RectMesh"));
 
 		++rotation;
