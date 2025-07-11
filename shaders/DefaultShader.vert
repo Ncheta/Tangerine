@@ -21,6 +21,6 @@ void main()
 {
      gl_Position =  viewprojection * transform * vec4(inPos,0.0, 1.0);
      Color.rgb = inColor.rgb + (tintColor.rgb * tintColor.w);
-     Color.a = alpha;
+     Color.a = clamp(alpha,0.0,1.0);
      TexCoord = inTexCoord + textOffset;
 }

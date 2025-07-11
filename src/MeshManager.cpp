@@ -78,9 +78,9 @@ Mesh* MeshManager::CreateMesh(const std::string& MeshName, Vertex vertices[], si
 
 int MeshManager::Init()
 {
-	Vertex trianglevertices[3] = { Vertex(glm::vec2(0.0f,0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0,0.0,0.0,1.0f)),
+	Vertex trianglevertices[3] = { Vertex(glm::vec2(0.0f,0.5f), glm::vec2(0.5f,1.0f), glm::vec4(1.0,0.0,0.0,1.0f)),
 					   Vertex(glm::vec2(-0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0,0.0,0.0,1.0f)),
-					   Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(0.0f,0.0f), glm::vec4(1.0,0.0,0.0,1.0f)) };
+					   Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(1.0f,0.0f), glm::vec4(1.0,0.0,0.0,1.0f)) };
 
 	Vertex rectanglevertices[6] = { Vertex(glm::vec2(0.5f,0.5f), glm::vec2(1.0f,1.0f), glm::vec4(0.0f,1.0f,0.0f,1.0f)),
 								   Vertex(glm::vec2(0.5f,-0.5f), glm::vec2(1.0f,0.0f), glm::vec4(0.0f,0.0f,1.0f,1.0f)),

@@ -13,24 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Graphics">
-      <UniqueIdentifier>{375dfb9e-989c-43df-8566-43a90b5f4d4f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Shader">
-      <UniqueIdentifier>{def7ba1a-0fd9-4689-892e-7116115a3b95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Texture">
-      <UniqueIdentifier>{1e279f09-13e0-45d7-bb7f-95f3a15d2139}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Camera">
-      <UniqueIdentifier>{61d3ff5b-52b2-4c32-983f-92d13dd0d688}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Material">
-      <UniqueIdentifier>{0b893dc2-eb4a-4fd3-a9ed-e8440bec6048}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Mesh">
-      <UniqueIdentifier>{39433faa-c260-4aa6-b90d-1e6c0ad44ae8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ShaderFiles">
       <UniqueIdentifier>{b612ab99-d11c-4dfe-bd31-e9629a29cdc9}</UniqueIdentifier>
     </Filter>
@@ -39,6 +21,27 @@
     </Filter>
     <Filter Include="ShaderFiles\Fragment">
       <UniqueIdentifier>{6b0d2fd2-e7c6-447d-88a3-625dfc010a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{375dfb9e-989c-43df-8566-43a90b5f4d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Shader">
+      <UniqueIdentifier>{def7ba1a-0fd9-4689-892e-7116115a3b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Texture">
+      <UniqueIdentifier>{1e279f09-13e0-45d7-bb7f-95f3a15d2139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Camera">
+      <UniqueIdentifier>{61d3ff5b-52b2-4c32-983f-92d13dd0d688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Material">
+      <UniqueIdentifier>{0b893dc2-eb4a-4fd3-a9ed-e8440bec6048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Mesh">
+      <UniqueIdentifier>{39433faa-c260-4aa6-b90d-1e6c0ad44ae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FrameController">
+      <UniqueIdentifier>{9cd5eeac-c85f-4f5b-b5a4-470df1cff99a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,34 +61,40 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Camera.cpp">
-      <Filter>Graphics\Camera</Filter>
+      <Filter>Source Files\Graphics\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\Material.cpp">
-      <Filter>Graphics\Material</Filter>
+      <Filter>Source Files\Graphics\Material</Filter>
     </ClCompile>
     <ClCompile Include="src\MaterialManager.cpp">
-      <Filter>Graphics\Material</Filter>
+      <Filter>Source Files\Graphics\Material</Filter>
     </ClCompile>
     <ClCompile Include="src\Mesh.cpp">
-      <Filter>Graphics\Mesh</Filter>
+      <Filter>Source Files\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\MeshManager.cpp">
-      <Filter>Graphics\Mesh</Filter>
+      <Filter>Source Files\Graphics\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="src\TextureManager.cpp">
-      <Filter>Graphics\Texture</Filter>
+      <Filter>Source Files\Graphics\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\Texture.cpp">
-      <Filter>Graphics\Texture</Filter>
+      <Filter>Source Files\Graphics\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\ShaderManager.cpp">
-      <Filter>Graphics\Shader</Filter>
+      <Filter>Source Files\Graphics\Shader</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicsSystem.cpp">
-      <Filter>Graphics</Filter>
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\shader.cpp">
-      <Filter>Graphics\Shader</Filter>
+      <Filter>Source Files\Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CustomShaderTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameControl.cpp">
+      <Filter>Source Files\FrameController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,37 +108,43 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Camera.h">
-      <Filter>Graphics\Camera</Filter>
+      <Filter>Source Files\Graphics\Camera</Filter>
     </ClInclude>
     <ClInclude Include="src\Material.h">
-      <Filter>Graphics\Material</Filter>
+      <Filter>Source Files\Graphics\Material</Filter>
     </ClInclude>
     <ClInclude Include="src\MaterialManager.h">
-      <Filter>Graphics\Material</Filter>
+      <Filter>Source Files\Graphics\Material</Filter>
     </ClInclude>
     <ClInclude Include="src\MeshManager.h">
-      <Filter>Graphics\Mesh</Filter>
+      <Filter>Source Files\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\Mesh.h">
-      <Filter>Graphics\Mesh</Filter>
+      <Filter>Source Files\Graphics\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="src\Texture.h">
-      <Filter>Graphics\Texture</Filter>
+      <Filter>Source Files\Graphics\Texture</Filter>
     </ClInclude>
     <ClInclude Include="src\TextureManager.h">
-      <Filter>Graphics\Texture</Filter>
+      <Filter>Source Files\Graphics\Texture</Filter>
     </ClInclude>
     <ClInclude Include="src\ShaderManager.h">
-      <Filter>Graphics\Shader</Filter>
+      <Filter>Source Files\Graphics\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\GraphicsSystem.h">
-      <Filter>Graphics</Filter>
+      <Filter>Source Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\shader.h">
-      <Filter>Graphics\Shader</Filter>
+      <Filter>Source Files\Graphics\Shader</Filter>
     </ClInclude>
     <ClInclude Include="src\stub.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CustomShaderTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameControl.h">
+      <Filter>Source Files\FrameController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +155,12 @@
       <Filter>ShaderFiles\Vertex</Filter>
     </None>
     <None Include="shaders\DefaultShaderAltTex.frag">
+      <Filter>ShaderFiles\Fragment</Filter>
+    </None>
+    <None Include="shaders\LinePractice.frag">
+      <Filter>ShaderFiles\Fragment</Filter>
+    </None>
+    <None Include="shaders\ColorGradients.frag">
       <Filter>ShaderFiles\Fragment</Filter>
     </None>
   </ItemGroup>

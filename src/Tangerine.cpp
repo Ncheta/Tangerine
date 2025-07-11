@@ -8,12 +8,14 @@
 #include "Tangerine.h"
 #include "GraphicsSystem.h"
 #include "glfwInterface.h"
+#include "FrameControl.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
 //------------------------------------------------------------------------------
 glfwInterface glfw;
 GraphicsSystem Graphics(glfw);
+FrameControl FrameController;
 
 //------------------------------------------------------------------------------
 // Private Structures:
@@ -41,12 +43,14 @@ namespace Tangerine
 	{
 		Graphics.Init();
 		Graphics.SetBGColor(glm::vec4(0.68f,0.85f,0.9f,1.0f));
+		FrameController.Init();
 	}
 
 	void Engine_Update()
 	{
 		glfw.Update();
 		Graphics.Update();
+		FrameController.Update();
 	}
 
 	void Engine_Exit()
@@ -262,9 +266,14 @@ namespace Tangerine
 		return Graphics.mglfw.ShouldClose();
 	}
 
-	float GetTime()
+	float Get_Time()
 	{
 		return Graphics.mglfw.GetTime();
+	}
+
+	float Get_DeltaTime()
+	{
+		return FrameController.GetDeltaTime();
 	}
 }
 //------------------------------------------------------------------------------

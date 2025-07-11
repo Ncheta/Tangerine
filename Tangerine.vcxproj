@@ -156,6 +156,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\CustomShaderTest.cpp" />
+    <ClCompile Include="src\FrameControl.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\glfwInterface.cpp" />
     <ClCompile Include="src\GraphicsSystem.cpp" />
@@ -173,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\CustomShaderTest.h" />
+    <ClInclude Include="src\FrameControl.h" />
     <ClInclude Include="src\glfwInterface.h" />
     <ClInclude Include="src\GraphicsSystem.h" />
     <ClInclude Include="src\Material.h" />
@@ -188,9 +192,11 @@
     <ClInclude Include="src\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\ColorGradients.frag" />
     <None Include="shaders\DefaultShader.frag" />
     <None Include="shaders\DefaultShader.vert" />
     <None Include="shaders\DefaultShaderAltTex.frag" />
+    <None Include="shaders\LinePractice.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

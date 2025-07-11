@@ -71,7 +71,7 @@ void Material::SetMaterialTextureOffset(const glm::vec2& textureOffset)
 
 void Material::SetMaterialTransparency(float transparency)
 {
-	mTransparency = std::min(1.f,std::max(0.0f, transparency));
+	mTransparency = transparency;
 }
 
 Shader* Material::GetShader() const 

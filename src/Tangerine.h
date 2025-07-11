@@ -26,7 +26,6 @@
 class Mesh;
 class Shader;
 class Texture;
-class CustomShader;
 class Material;
 //------------------------------------------------------------------------------
 // Public Constants:
@@ -127,7 +126,8 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Set_CustomShader(Shader* shader);
 	void Set_CurrMaterial(Material* material);
 	bool ShouldClose();
-	float GetTime();
+	float Get_Time();
+	float Get_DeltaTime();
 }
 
 
