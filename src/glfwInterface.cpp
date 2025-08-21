@@ -16,6 +16,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <string>
 #include "GraphicsSystem.h"
+#include "InputSystem.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -66,7 +67,9 @@ int glfwInterface::Initalize(std::string windowName, int width, int height)
 	glfwMakeContextCurrent(mwindow);
 	glfwSwapInterval(1);
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress) || !minput)
 	{
 		glfwDestroyWindow(mwindow);
 		mwindow = nullptr;
@@ -74,8 +77,15 @@ int glfwInterface::Initalize(std::string windowName, int width, int height)
 		return -1;
 	}
 
+	glfwSetKeyCallback(mwindow, minput->HandleInputs);
 
 
+
+	
+
+	
+
+	
 	return 1;
 }
 
@@ -97,6 +107,7 @@ void glfwInterface::Update()
 		return;
 	}
 
+	minput->Update();
 	glfwPollEvents();
 	glfwSwapBuffers(mwindow);
 }
@@ -111,6 +122,8 @@ void glfwInterface::Exit()
 	}
 
 	glfwDestroyWindow(mwindow);
+	minput->Exit();
+	minput = nullptr;
 	mwindow = nullptr;
 	glfwTerminate();
 }
@@ -126,9 +139,9 @@ void glfwInterface::SetWindowSize(int width, int height)
 	glfwSetWindowSize(mwindow, width, height);
 }
 
-float glfwInterface::GetTime()
+double glfwInterface::GetTime()
 {
-	return static_cast<float>(glfwGetTime());
+	return glfwGetTime();
 }
 
 glm::vec2 glfwInterface::GetWindowSize()
@@ -149,6 +162,10 @@ glfwInterface::~glfwInterface()
 {
 	Exit();
 }
+
+
+
+
 
 
 

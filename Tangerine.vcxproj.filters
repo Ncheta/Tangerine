@@ -96,6 +96,9 @@
     <ClCompile Include="src\FrameControl.cpp">
       <Filter>Source Files\FrameController</Filter>
     </ClCompile>
+    <ClCompile Include="src\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stb_image.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="src\FrameControl.h">
       <Filter>Source Files\FrameController</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

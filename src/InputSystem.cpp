@@ -1,17 +1,15 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	FrameControl.cpp
+// File Name:	InputSystem.cpp
 // Author(s):	Ncheta Mbaraonye 
 //
 //------------------------------------------------------------------------------
 
-#include "FrameControl.h"
+// Using glfw for window handling
+#include <glfw/glfw3.h>
 #include "glfwInterface.h"
-#include "Tangerine.h"
-#include <chrono>
-#include <thread>
+#include "InputSystem.h"
 
-//REFERENCED: https://github.com/DigiPen-Faculty/DigiPen-Graphics-Library/blob/main/DigiPen_Graphics_Library/src/FrameRateController.cpp
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -24,7 +22,7 @@
 //------------------------------------------------------------------------------
 // Private Variables:
 //------------------------------------------------------------------------------
-
+static InputSystem* gInput = nullptr;
 //------------------------------------------------------------------------------
 // Public Variables:
 //------------------------------------------------------------------------------
@@ -37,79 +35,90 @@
 //------------------------------------------------------------------------------
 // Public Functions:
 //------------------------------------------------------------------------------
-double FrameControl::GetDeltaTime() const
+
+InputSystem::InputSystem()
 {
-	return mdeltaTime;
+	gInput = this;
+	prevkeys.fill(false);
+	currkeys.fill(false);
 }
 
-unsigned FrameControl::GetFrameCount()
+int InputSystem::Init()
 {
-	return mframeCounter;
+	return 0;
 }
 
-void FrameControl::StartFrame()
+void InputSystem::Update()
 {
-	++mframeCounter;
+	prevkeys = currkeys;
 
-	double currTime = 0;
-	double currTimeLeft = 0;
-	double prevTimeLeft = 0;
+	lastkeytriggered = 0;
+}
 
-	while (mdeltaTime < minframetime)
+void InputSystem::Exit()
+{
+	gInput = nullptr;
+}
+
+bool InputSystem::KeyDown(unsigned char key)
+{
+	if (key > 256 || key < 0)
 	{
-		currTime = Tangerine::Get_Time();
-		mdeltaTime = currTime - mprevFrameTime;
-
-		currTimeLeft = minframetime - mdeltaTime;
-
-		if (currTimeLeft > mAverageSleepCycles + mSleepCyclesBuffer)
-		{
-			prevTimeLeft = currTimeLeft;
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-
-			currTime = Tangerine::Get_Time();
-			mdeltaTime = currTime - mprevFrameTime;
-
-			currTimeLeft = minframetime - mdeltaTime;
-
-			mAverageSleepCycles = ((mAverageSleepCycles * 15.0) + (prevTimeLeft - currTimeLeft)) / 16.0;
-		}
+		//@@TODO: ERROR CHECKING
+		return false;
 	}
 
-	mprevFrameTime = currTime;
+	if (currkeys[key] && prevkeys[key]) return true;
+	else return false;
 }
 
-void FrameControl::Init()
+bool InputSystem::KeyTriggered(unsigned char key)
 {
-	//@@TODO: add a frameRateMax function of some sort
+	if (key > 256 || key < 0)
+	{
+		//@@TODO: ERROR CHECKING
+		return false;
+	}
+
+	if (currkeys[key] && !prevkeys[key]) return true;
+	else return false;
+}
+
+bool InputSystem::KeyReleased(unsigned char key)
+{
+	if (key > 256 || key < 0)
+	{
+		//@@TODO: ERROR CHECKING
+		return false;
+	}
+
+	if (!currkeys[key] && prevkeys[key]) return true;
+	else return false;
+}
+
+void InputSystem::SetKeyState(unsigned char key, bool state)
+{
+	if (key > 256 || key < 0)
+	{
+		//@@TODO: ERROR CHECKING
+		return;
+	}
+
+	currkeys[key] = state;
+	if (state && !prevkeys[key]) lastkeytriggered = key;
+}
+
+void InputSystem::HandleInputs(WindowHNDL window, int key, int scancode, int action, int mods)
+{
+	if (key < 256 && key > 0)
+	{
+		if (action == GLFW_PRESS) 	gInput->SetKeyState(key, true);
+		else if (action == GLFW_RELEASE) gInput->SetKeyState(key, false);
+	}
+
 	
-	maxframeRate = 60;
-	mprevFrameTime = Tangerine::Get_Time();
-
-	Reset();
-}
-
-void FrameControl::Update()
-{
-	StartFrame();
-}
-void FrameControl::Reset()
-{
-	mframeCounter = 0;
-
-	if (maxframeRate != 0)
-	{
-		mdeltaTime = 1.0 / maxframeRate;
-		minframetime = 1.0 / maxframeRate;
-	}
-	else
-	{
-		mdeltaTime = 0.0f;
-		minframetime = 0.0f;
-	}
 }
 //------------------------------------------------------------------------------
 // Private Functions:
 //------------------------------------------------------------------------------
-
 

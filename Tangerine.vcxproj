@@ -161,6 +161,7 @@
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\glfwInterface.cpp" />
     <ClCompile Include="src\GraphicsSystem.cpp" />
+    <ClCompile Include="src\InputSystem.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Material.cpp" />
     <ClCompile Include="src\MaterialManager.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="src\FrameControl.h" />
     <ClInclude Include="src\glfwInterface.h" />
     <ClInclude Include="src\GraphicsSystem.h" />
+    <ClInclude Include="src\InputSystem.h" />
     <ClInclude Include="src\Material.h" />
     <ClInclude Include="src\MaterialManager.h" />
     <ClInclude Include="src\Mesh.h" />

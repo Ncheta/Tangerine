@@ -92,8 +92,8 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Set_TransformMatrix(const glm::mat4& transformMatrix);
 
 	void Set_MaterialTextureOffset(Material* material, const glm::vec2& offset);
-	void Set_MaterialTintColor(Material& material, const glm::vec4& color);
-	void Set_MaterialTexture(Material& material, Texture* texture);
+	void Set_MaterialTintColor(Material* material, const glm::vec4& color);
+	void Set_MaterialTexture(Material* material, Texture* texture);
 	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle);
 	void Set_CameraPos(const glm::vec2& pos);
 	void Set_CameraZoom(float zoom);
@@ -125,9 +125,14 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 
 	void Set_CustomShader(Shader* shader);
 	void Set_CurrMaterial(Material* material);
+
+	bool Key_Triggered(unsigned char key);
+	bool Key_Down(unsigned char key);
+	bool Key_Released(unsigned char key);
+
 	bool ShouldClose();
-	float Get_Time();
-	float Get_DeltaTime();
+	double Get_Time();
+	double Get_DeltaTime();
 }
 
 

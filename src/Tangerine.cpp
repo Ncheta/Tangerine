@@ -9,6 +9,7 @@
 #include "GraphicsSystem.h"
 #include "glfwInterface.h"
 #include "FrameControl.h"
+#include "InputSystem.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -16,6 +17,8 @@
 glfwInterface glfw;
 GraphicsSystem Graphics(glfw);
 FrameControl FrameController;
+InputSystem Input;
+
 
 //------------------------------------------------------------------------------
 // Private Structures:
@@ -41,16 +44,18 @@ namespace Tangerine
 {
 	void Engine_Init()
 	{
+		glfw.minput = &Input;
 		Graphics.Init();
 		Graphics.SetBGColor(glm::vec4(0.68f,0.85f,0.9f,1.0f));
 		FrameController.Init();
+
 	}
 
 	void Engine_Update()
 	{
+		FrameController.Update();
 		glfw.Update();
 		Graphics.Update();
-		FrameController.Update();
 	}
 
 	void Engine_Exit()
@@ -261,17 +266,32 @@ namespace Tangerine
 		Graphics.SetCurrMaterial(material);
 	}
 
+	bool Key_Triggered(unsigned char key)
+	{
+		return Input.KeyTriggered(key);
+	}
+
+	bool Key_Down(unsigned char key)
+	{
+		return Input.KeyDown(key);
+	}
+
+	bool Key_Released(unsigned char key)
+	{
+		return Input.KeyReleased(key);
+	}
+
 	bool ShouldClose()
 	{
 		return Graphics.mglfw.ShouldClose();
 	}
 
-	float Get_Time()
+	double Get_Time()
 	{
 		return Graphics.mglfw.GetTime();
 	}
 
-	float Get_DeltaTime()
+	double Get_DeltaTime()
 	{
 		return FrameController.GetDeltaTime();
 	}

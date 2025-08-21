@@ -24,18 +24,19 @@
 
 
 
+
 int main(void)
 {
 
 	Tangerine::Engine_Init();
 	Texture* testTexture = Tangerine::Create_Texture("ManTexture","assets/man.png");
-	Shader* testShader = Tangerine::Create_Shader("test", "shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
+	//Shader* testShader = Tangerine::Create_Shader("test", "shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
 	Material* man = Tangerine::Create_Material("man", Tangerine::Get_Texture("ManTexture"));
 	Shader* LineGradientBaseShader = Tangerine::Create_Shader("LineGrad", "shaders/DefaultShader.vert", "shaders/LinePractice.frag");
 	Shader* ColorGradientBaseShader = Tangerine::Create_Shader("ColorGrad", "shaders/DefaultShader.vert", "shaders/ColorGradients.frag");
 	CustomShaderTest LineGradient(LineGradientBaseShader);
 	CustomShaderTest ColorGradient(ColorGradientBaseShader);
-	Material* testingMat = Tangerine::Create_Material("TestingMat", nullptr, ColorGradientBaseShader);
+	Material* testingMat = Tangerine::Create_Material("TestingMat", nullptr, LineGradientBaseShader);
 	//Tangerine::Set_MaterialTextureOffset(man, glm::vec2(1.0, 0.5));
 	
 	float pos = 1.f;
@@ -43,6 +44,7 @@ int main(void)
 	float rotation = 0.f;
 	float tint = 0.3f;
 	float offset = 0.0f;
+	float color = 0.0f;
 	while (!Tangerine::ShouldClose())
 	{
 		//Tangerine::Set_BGColor(glm::vec4(1.0, 0.0, 0.0, 0.0));
@@ -63,7 +65,7 @@ int main(void)
 		Tangerine::Set_TransformData(glm::vec2(pos,0.0f), glm::vec2(200.f, 200.f), 0.f);
 		Tangerine::Set_CurrMaterial(Tangerine::Get_Material("man"));
 		Tangerine::Set_GlobalShaderMode(GlobalShaderMode::DEFAULT);
-		Tangerine::Set_CustomShader(Tangerine::Get_Shader("test"));
+		//Tangerine::Set_CustomShader(Tangerine::Get_Shader("test"));
 		//Tangerine::Set_CurrMatTintColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 		//Tangerine::Set_CurrMatTextureOffset(glm::vec2(offset, 0.0f));
 		Tangerine::Draw(Tangerine::Get_Mesh("RectMesh"));
@@ -74,6 +76,20 @@ int main(void)
 		Tangerine::Draw(Tangerine::Get_Mesh("RectMesh"));
 		ColorGradient.SetCustomUniforms();
 		
+
+		if (Tangerine::Key_Triggered('L'))
+		{
+			Tangerine::Set_MaterialTintColor(Tangerine::Get_Material("SmoothPlastic"), glm::vec4(0.0f, sinf(Tangerine::Get_Time()), 0.0f, 1.0));
+			color += 1.0f * Tangerine::Get_DeltaTime();
+			
+		}
+
+		if (Tangerine::Key_Down('L'))
+		{
+			//Tangerine::Set_MaterialTintColor(Tangerine::Get_Material("SmoothPlastic"), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+
+
 
 
 		++rotation;

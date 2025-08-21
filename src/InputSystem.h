@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	glfwInterface.h
-// Author(s):	Ncheta Mbaraonye (ncheta.mbaraonye)
+// File Name:	InputSystem.h
+// Author(s):	Ncheta Mbaraonye 
 // 
 //------------------------------------------------------------------------------
 
@@ -10,12 +10,7 @@
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
-#include <string>
-// Using glm for math
-#include "glm/glm.hpp"
-#include <glm/gtx/transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
+#include <array>
 //------------------------------------------------------------------------------
 
 
@@ -24,7 +19,8 @@
 //------------------------------------------------------------------------------
 // Forward References:
 //------------------------------------------------------------------------------
-class InputSystem;
+class glfwInterface;
+typedef WindowHNDL;
 //------------------------------------------------------------------------------
 // Public Constants:
 //------------------------------------------------------------------------------
@@ -32,8 +28,7 @@ class InputSystem;
 //------------------------------------------------------------------------------
 // Public Typedefs:
 //------------------------------------------------------------------------------
-typedef struct GLFWwindow GLFWwindow;
-typedef GLFWwindow* WindowHNDL;
+
 
 
 //------------------------------------------------------------------------------
@@ -44,31 +39,33 @@ typedef GLFWwindow* WindowHNDL;
 //------------------------------------------------------------------------------
 // Class:
 //------------------------------------------------------------------------------
-class glfwInterface
+
+class InputSystem
 {
 public:
-// Public Functions:
-	int Initalize(std::string windowName, int width = 1080, int height = 720);
-	int ShouldClose();
+
+	//Public Functions:
+	InputSystem();
+	int Init();
 	void Update();
 	void Exit();
-	void SetWindowSize(int width, int height);
-	double GetTime();
-	glm::vec2 GetWindowSize();
-	WindowHNDL GetWindowHandle();
-	~glfwInterface();
-// Public Variables
-	InputSystem* minput;
+
+	bool KeyDown(unsigned char key);
+	bool KeyTriggered(unsigned char key);
+	bool KeyReleased(unsigned char key);
+
+	void SetKeyState(unsigned char key, bool state);
+	static void HandleInputs(WindowHNDL window, int key, int scancode, int action, int mods);
+	//Public Variables:
 private:
-// Private Functions:
-	void HandleInputs(WindowHNDL window, int key, int scancode, int action, int mods);
-
-// Private Variables:
-	WindowHNDL mwindow{nullptr};
+	//Private Functions:
 	
+	//Private Variables:
+	std::array<bool, 256> prevkeys;
+	std::array<bool, 256> currkeys;
 
+	unsigned char lastkeytriggered{ 0 };
 };
-
 
 
 
