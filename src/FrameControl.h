@@ -52,16 +52,16 @@ public:
 
 	//Public Variables:
 private:
-	double mdeltaTime{ 0.0f };
-	double mprevFrameTime{ 0.0f };
-	
-	unsigned maxframeRate{ 0 };
-	unsigned mframeCounter{0};
-	double minframetime{0};
-	double mAverageSleepCycles{0.002};
-	double mSleepCyclesBuffer{ 0.001 };
 	//Private Functions:
 	//Private Variables:
+	double mdeltaTime{ 0.0f };
+	double mprevFrameTime{ 0.0f };
+
+	unsigned maxframeRate{ 0 };
+	unsigned mframeCounter{ 0 };
+	double minframetime{ 0 };
+	double mAverageSleepCycles{ 0.010 };
+	double mSleepCyclesBuffer{ 0.001 };
 };
 
 

@@ -84,15 +84,15 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\icecr\Documents\Tangerine\lib;$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>C:\Users\icecr\Documents\Tangerine\src;C:\Users\icecr\Documents\Tangerine\inc;$(IncludePath);$(ExternalIncludePath)</ExternalIncludePath>
-    <SourcePath>C:\Users\icecr\Documents\Tangerine\src;$(SourcePath)</SourcePath>
+    <LibraryPath>lib;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>src;inc;$(IncludePath);$(ExternalIncludePath)</ExternalIncludePath>
+    <SourcePath>src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\icecr\Documents\Tangerine\lib;$(LibraryPath)</LibraryPath>
-    <ExternalIncludePath>C:\Users\icecr\Documents\Tangerine\src;C:\Users\icecr\Documents\Tangerine\inc;$(IncludePath);$(ExternalIncludePath)</ExternalIncludePath>
-    <SourcePath>C:\Users\icecr\Documents\Tangerine\src;$(SourcePath)</SourcePath>
+    <LibraryPath>lib;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>src;inc;$(IncludePath);$(ExternalIncludePath)</ExternalIncludePath>
+    <SourcePath>src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

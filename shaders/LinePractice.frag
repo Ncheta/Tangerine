@@ -40,7 +40,7 @@ void main(void)
    // float y =  ceil(sin(st.x)) + floor(sin(st.x));//abs(sin(st.x + (u_time/2.f)));//smoothstep(0.2,0.5,st.x) - smoothstep(0.5,0.8,st.x);
    // float y = quadraticBezier(st.x, 0.940, 0.780);
    //float y = 1.0 - pow(abs(st.x), 1.0);
-   float y = sin(st.x);
+   float y = 2 * st.x;
     vec3 color = vec3(y);
 
     float pct = plot(st, y);

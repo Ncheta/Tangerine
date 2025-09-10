@@ -23,7 +23,7 @@
 
 
 
-
+//@@TODO: Add a README doc
 
 int main(void)
 {
@@ -45,6 +45,7 @@ int main(void)
 	float tint = 0.3f;
 	float offset = 0.0f;
 	float color = 0.0f;
+	float counter = 0.f;
 	while (!Tangerine::ShouldClose())
 	{
 		//Tangerine::Set_BGColor(glm::vec4(1.0, 0.0, 0.0, 0.0));
@@ -77,16 +78,23 @@ int main(void)
 		ColorGradient.SetCustomUniforms();
 		
 
+
+
 		if (Tangerine::Key_Triggered('L'))
 		{
-			Tangerine::Set_MaterialTintColor(Tangerine::Get_Material("SmoothPlastic"), glm::vec4(0.0f, sinf(Tangerine::Get_Time()), 0.0f, 1.0));
-			color += 1.0f * Tangerine::Get_DeltaTime();
-			
+			Tangerine::Set_MaterialTintColor(Tangerine::Get_Material("SmoothPlastic"), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			counter = 0;
 		}
 
-		if (Tangerine::Key_Down('L'))
+		else
 		{
-			//Tangerine::Set_MaterialTintColor(Tangerine::Get_Material("SmoothPlastic"), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			counter += (float)Tangerine::Get_DeltaTime();
+			
+			if (counter >= 5)
+			{
+				Tangerine::Set_MaterialTintColor(Tangerine::Get_Material("SmoothPlastic"), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+			}
+			
 		}
 
 
