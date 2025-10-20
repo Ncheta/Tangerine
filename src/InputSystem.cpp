@@ -51,7 +51,6 @@ int InputSystem::Init()
 void InputSystem::Update()
 {
 	prevkeys = currkeys;
-
 	lastkeytriggered = 0;
 }
 
@@ -80,7 +79,7 @@ bool InputSystem::KeyTriggered(unsigned char key)
 		return false;
 	}
 
-	if (currkeys[key] && !prevkeys[key]) return true;
+	if (currkeys[key]) return true;
 	else return false;
 }
 

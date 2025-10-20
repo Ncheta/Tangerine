@@ -62,6 +62,7 @@ public:
 	void SetWindowSize(int width, int height);
 	void SetCameraPos(const glm::vec2& pos);
 	void SetZoom(float zoomval);
+	void SetTarget(const glm::vec2& targetpos);
 	
 	//Public Variables:
 private:
@@ -71,6 +72,7 @@ private:
 	glm::vec2 mWindowSize{ 0.f };
 	float mRotation{0.f};
 	glm::vec3 mCameraPosition{ 0.0f,0.0f,1.0f };
+	glm::vec3 mtarget{ 0.0,0.0f,1.0f };
 	float mzoom{ 1.f };
 
 	bool isWorldMatrixDirty{ true };

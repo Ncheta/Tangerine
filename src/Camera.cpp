@@ -48,7 +48,7 @@ void CameraObj::Init(glfwInterface& glfw)
 
 glm::mat4 CameraObj::GetViewMatrix()
 {
-	glm::mat4 view = glm::lookAt(mCameraPosition, glm::vec3(mCameraPosition.x, mCameraPosition.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 view = glm::lookAt(mtarget, glm::vec3(mtarget.x, mtarget.y, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	return view;
 }
 
@@ -129,6 +129,11 @@ void CameraObj::SetZoom(float zoom)
 {
 	mzoom = zoom;
 	isWorldMatrixDirty = true;
+}
+
+void CameraObj::SetTarget(const glm::vec2& targetpos)
+{
+	mtarget = glm::vec3(targetpos,1.0);
 }
 
 
