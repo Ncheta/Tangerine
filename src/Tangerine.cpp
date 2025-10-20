@@ -144,6 +144,11 @@ namespace Tangerine
 		Graphics.Camera.SetZoom(zoom);
 	}
 
+	void Set_CameraTarget(const glm::vec2& pos)
+	{
+		Graphics.Camera.SetTarget(pos);
+	}
+
 	void Set_WindowSize(const glm::vec2& windowSize)
 	{
 		Graphics.Camera.SetWindowSize(windowSize.x, windowSize.y);

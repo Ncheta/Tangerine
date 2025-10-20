@@ -97,6 +97,7 @@ namespace Tangerine //@@TODO: add some kind of pixel to position thing for all p
 	void Set_TransformData(const glm::vec2& pos, const glm::vec2& scale, float angle);
 	void Set_CameraPos(const glm::vec2& pos);
 	void Set_CameraZoom(float zoom);
+	void Set_CameraTarget(const glm::vec2& pos);
 	void Set_WindowSize(const glm::vec2& windowSize);
 	void Set_WindowSize(int width, int height);
 	void Set_ScreenSpaceDraw(bool draw);
