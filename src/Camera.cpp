@@ -134,6 +134,7 @@ void CameraObj::SetZoom(float zoom)
 void CameraObj::SetTarget(const glm::vec2& targetpos)
 {
 	mtarget = glm::vec3(targetpos,1.0);
+	isWorldMatrixDirty = true;
 }
 
 
