@@ -66,6 +66,7 @@ int main(void)
 		Tangerine::Set_TransformData(glm::vec2(pos,0.0f), glm::vec2(200.f, 200.f), 0.f);
 		Tangerine::Set_CurrMaterial(Tangerine::Get_Material("man"));
 		Tangerine::Set_GlobalShaderMode(GlobalShaderMode::DEFAULT);
+		Tangerine::Set_CameraTarget(glm::vec2(pos,0.0f));
 		//Tangerine::Set_CustomShader(Tangerine::Get_Shader("test"));
 		//Tangerine::Set_CurrMatTintColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 		//Tangerine::Set_CurrMatTextureOffset(glm::vec2(offset, 0.0f));
