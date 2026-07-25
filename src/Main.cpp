@@ -7,7 +7,7 @@
 #include <sstream>
 #include <vector>
 
-
+#define DRAW_TEST 0
 //// Using glad to help with loading OpenGL
 //#include "glad/glad.h" //remove after adding camera and stuff just here for testing rn
 
@@ -29,6 +29,7 @@ int main(void)
 {
 
 	Tangerine::Engine_Init();
+#if DRAW_TEST == 0
 	Texture* testTexture = Tangerine::Create_Texture("ManTexture","assets/man.png");
 	//Shader* testShader = Tangerine::Create_Shader("test", "shaders/DefaultShader.vert", "shaders/DefaultShader.frag");
 	Material* man = Tangerine::Create_Material("man", Tangerine::Get_Texture("ManTexture"));
@@ -46,13 +47,20 @@ int main(void)
 	float offset = 0.0f;
 	float color = 0.0f;
 	float counter = 0.f;
+	#elif DRAW_TEST == 1
+	Tangerine::Set_BGColor(glm::vec4(0.78f, 0.71f, 0.65f, 1.0f));
+	bool follow = false;
+	glm::vec2 pos{ 0.0f,0.0f };
+#endif
 	while (!Tangerine::ShouldClose())
 	{
 		//Tangerine::Set_BGColor(glm::vec4(1.0, 0.0, 0.0, 0.0));
 		Tangerine::Engine_Update();
 		Tangerine::Start_Draw();
-		//Tangerine::Set_CurrMatTintColor(glm::vec4(0.0, 1.0, 0.0, 0.5));
 
+
+		//Tangerine::Set_CurrMatTintColor(glm::vec4(0.0, 1.0, 0.0, 0.5));
+#if DRAW_TEST == 0
 		Tangerine::Set_TransformData(Tangerine::Get_WindowSize()/4.f, glm::vec2(100.f, 100.f), rotation);
 		Tangerine::Set_CurrMaterial(Tangerine::Get_Material("SmoothPlastic"));
 		//Tangerine::Set_MaterialTransparency(Tangerine::Get_Material("SmoothPlastic"), 0.1f);
@@ -104,6 +112,46 @@ int main(void)
 		++rotation;
 		offset += 0.01f;
 		glm::vec2 vec = glm::vec2(pos, 0.f);
+#elif DRAW_TEST == 1
+		if (Tangerine::Key_Triggered('Q'))
+		{
+			Tangerine::Set_BGColor(glm::vec4(0.34f, 0.53f, 0.49f, 1.0f));
+		}
+		if (Tangerine::Key_Triggered('W'))
+		{
+			pos.y += 100.f * Tangerine::Get_DeltaTime();
+		}
+		if (Tangerine::Key_Triggered('S'))
+		{
+			pos.y -= 100.f * Tangerine::Get_DeltaTime();
+		}
+		if (Tangerine::Key_Triggered('A'))
+		{
+			pos.x -= 100.f * Tangerine::Get_DeltaTime();
+		}
+		if (Tangerine::Key_Triggered('D'))
+		{
+			pos.x += 100.f * Tangerine::Get_DeltaTime();
+		}
+		if (Tangerine::Key_Triggered('C'))
+		{
+			Tangerine::Set_CameraZoom(0.5f);
+			follow = true;
+		}
+		if (Tangerine::Key_Triggered('V'))
+		{
+			Tangerine::Set_CameraZoom(1.0f);
+
+			follow = false;
+		}
+
+		if (follow) Tangerine::Set_CameraTarget(pos);
+		else Tangerine::Set_CameraTarget(glm::vec2(0.0f, 0.0f));
+		Tangerine::Set_CurrMatTintColor(glm::vec4(-1.0, -1.0, -1.0, 1.0f));
+		Tangerine::Set_TransformData(pos, glm::vec2(50.f, 50.f), 0.f);
+		Tangerine::Draw(Tangerine::Get_Mesh("TriangleMesh"));
+#endif // DRAW_TEST
+
 		//Tangerine::Set_CameraZoom(fabs(sinf(zoom)) + 0.1f);
 		//zoom += 0.01f;
 		//Tangerine::Set_CameraPos(vec);
