@@ -24,5 +24,4 @@ The goal of Tangerine was to create a deeper understanding of how game engines a
 ## Author
 
 **Ncheta Mbaraonye**
-
-Computer Science in Real Time Interactive Simulations student interested in graphics programming, audio programming, simulations and engine development.
+_Computer Science in Real Time Interactive Simulations student interested in graphics programming, audio programming, simulations and engine development._
