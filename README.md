@@ -15,7 +15,7 @@ Tangerine is a custom-built 2D rendering engine focused on understanding and imp
 ## Technologies
 - **Languages:** C++, GLSL
 - **Graphics API:** OpenGL
-- **Build System:** Visual Studio
+- **Build System:** MSBuild
 - **Libraries:** GLFW, GLAD, GLM
 
 ## Goals
