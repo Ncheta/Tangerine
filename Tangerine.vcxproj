@@ -199,6 +199,7 @@
     <None Include="shaders\DefaultShader.vert" />
     <None Include="shaders\DefaultShaderAltTex.frag" />
     <None Include="shaders\LinePractice.frag" />
+    <None Include="shaders\Squares.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

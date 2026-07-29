@@ -6,6 +6,7 @@
 //------------------------------------------------------------------------------
 
 #include "shader.h"
+#include "ShaderManager.h"
 
 //------------------------------------------------------------------------------
 // Private Constants:
@@ -138,10 +139,10 @@ void Shader::SetFloat(const std::string& name, float value) const
 
 void Shader::SetVec2(const std::string& name, const glm::vec2& value) const
 {
-	if (glGetUniformLocation(ID, name.c_str()) == -1)
-	{
-		std::cout << "Warning: " << name << " not found" << std::endl;
-	}
+	//if (glGetUniformLocation(ID, name.c_str()) == -1)
+	//{
+	//	std::cout << "Warning: " << name << " not found" << std::endl;
+	//}
 
 	glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, glm::value_ptr(value));
 }
@@ -181,10 +182,10 @@ void Shader::SetMat3(const std::string& name, const glm::mat3& mat) const
 // ------------------------------------------------------------------------
 void Shader::SetMat4(const std::string& name, const glm::mat4& mat) const
 {
-	if (glGetUniformLocation(ID, name.c_str()) == -1)
-	{
-		std::cout << "Warning: " << name << " not found" << std::endl;
-	}
+	//if (glGetUniformLocation(ID, name.c_str()) == -1)
+	//{
+	//	std::cout << "Warning: " << name << " not found: "<< std::endl;
+	//}
 	glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
